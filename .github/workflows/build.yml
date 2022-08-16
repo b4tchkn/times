@@ -1,0 +1,61 @@
+name: Build
+on:
+  pull_request:
+    types: [ opened, ready_for_review, reopened, synchronize ]
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Check lint
+        run: ./gradlew lintDebug --stacktrace
+
+      - name: Build all build type and flavor permutations
+        run: ./gradlew assemble --stacktrace
+
+      - name: Run local tests
+        run: ./gradlew testDebug --stacktrace
+
+      - name: Upload build outputs (APKs)
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-outputs
+          path: app/build/outputs
+
+      - name: Slack Notification Success
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_TITLE: 'Message'
+          SLACK_MESSAGE: 'Android Build Success :rocket: ${{ github.repository }}'
+          SLACK_COLOR: ${{ job.status }}
+      - name: Slack Notification Failure
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_TITLE: 'Message'
+          SLACK_MESSAGE: 'Android Build Failure :mask: ${{ github.repository }}'
+          SLACK_COLOR: ${{ job.status }}
