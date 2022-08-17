@@ -29,6 +29,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
+      - name: Check spotless
+        run: ./gradlew spotlessCheck --stacktrace
+
       - name: Check lint
         run: ./gradlew lintDebug --stacktrace
 
@@ -37,7 +40,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_TITLE: 'Message'
-          SLACK_MESSAGE: 'Android Build Success :rocket: ${{ github.repository }}'
+          SLACK_MESSAGE: 'Lint Check Success :rocket: ${{ github.repository }}'
           SLACK_COLOR: ${{ job.status }}
 
       - name: Slack Notification Failure
@@ -46,7 +49,7 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_TITLE: 'Message'
-          SLACK_MESSAGE: 'Android Build Failure :mask: ${{ github.repository }}'
+          SLACK_MESSAGE: 'Lint Check Failure :mask: ${{ github.repository }}'
           SLACK_COLOR: ${{ job.status }}
 
       - name: Build all build type and flavor permutations
