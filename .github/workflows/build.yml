@@ -30,7 +30,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Check spotless
-        run: ./gradlew spotlessCheck --stacktrace
+        run: ./gradlew spotlessKotlinCheck --stacktrace
 
       - name: Check lint
         run: ./gradlew lintDebug --stacktrace
