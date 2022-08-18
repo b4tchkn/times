@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-./gradlew spotlessKotlinApply --set-exit-if-changed
 ./gradlew spotlessKotlinCheck --stacktrace
+./gradlew spotlessKotlinApply
