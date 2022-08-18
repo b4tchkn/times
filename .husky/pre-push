@@ -1,11 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-./gradlew spotlessKotlinApply
-DIFF=`git diff`
-
-if [ DIFF -eq ""]; then
+if ! ./gradlew spotlessKotlinCheck; then
+  ./gradlew spotlessKotlinApply
   exit 1
 fi
-
-./gradlew spotlessKotlinCheck --stacktrace
