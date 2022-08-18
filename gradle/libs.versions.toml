@@ -1,0 +1,5 @@
+[versions]
+androidDesugarJdkLibs = "1.1.5"
+
+[libraries]
+androidDesugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
