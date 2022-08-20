@@ -1,6 +1,6 @@
 package com.b4tchkn.times
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 /**
