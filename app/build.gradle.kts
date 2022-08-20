@@ -18,7 +18,11 @@ dependencies {
     implementation(libs.composeMaterial)
     implementation(libs.composeUiToolingPreview)
     implementation(libs.androidxLifecycleRuntimeKtx)
+    implementation(libs.androidxLifecycleViewmodelCompose)
     implementation(libs.androidxActivity)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofitConverterSimplexml)
 
     implementation(libs.junit)
     implementation(libs.androidxTestExtJunit)
