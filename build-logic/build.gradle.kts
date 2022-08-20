@@ -22,4 +22,10 @@ gradlePlugin {
             implementationClass = "com.b4tchkn.times.primitive.AndroidApplicationPlugin"
         }
     }
+    plugins {
+        register("spotless") {
+            id = "com.b4tchkn.primitive.spotless"
+            implementationClass = "com.b4tchkn.times.primitive.SpotlessPlugin"
+        }
+    }
 }

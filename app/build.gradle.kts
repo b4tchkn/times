@@ -1,5 +1,6 @@
 plugins {
     id("com.b4tchkn.primitive.androidapplication")
+    id("com.b4tchkn.primitive.spotless")
 }
 
 android {
