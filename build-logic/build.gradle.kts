@@ -17,7 +17,7 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("androidApplicationCompose") {
+        register("androidApplication") {
             id = "com.b4tchkn.primitive.androidapplication"
             implementationClass = "com.b4tchkn.times.primitive.AndroidApplicationPlugin"
         }
