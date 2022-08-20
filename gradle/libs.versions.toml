@@ -1,5 +1,5 @@
 [versions]
-androidGradlePlugin = "7.4.0-alpha03"
+androidGradlePlugin = "7.4.0-alpha09"
 kotlin = "1.7.0"
 spotless = "6.7.2"
 androidDesugarJdkLibs = "1.1.5"
