@@ -1,6 +1,6 @@
 [versions]
-androidGradlePlugin = "7.4.0-alpha03"
-kotlin = "1.7.10"
+androidGradlePlugin = "7.2.2"
+kotlin = "1.7.0"
 spotless = "6.7.2"
 ktlint = "0.43.0"
 androidDesugarJdkLibs = "1.1.5"
@@ -31,3 +31,8 @@ androidxTestEspressoCore = { group = "androidx.test.espresso", name = "espresso-
 composeUiTestJunit = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
 composeUiTooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
 composeUiTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose" }
+
+[plugins]
+androidGradlePlugin = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+androidGradleLibraryPlugin = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlinPlugin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
