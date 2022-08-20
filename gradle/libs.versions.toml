@@ -2,7 +2,7 @@
 androidGradlePlugin = "7.4.0-alpha03"
 kotlin = "1.7.10"
 spotless = "6.9.1"
-ktlint = "0.43.0"
+ktlint = "0.47.0"
 androidDesugarJdkLibs = "1.1.5"
 
 androidxCore = "1.8.0"
