@@ -10,9 +10,9 @@ java {
 }
 
 dependencies {
-    implementation("com.android.tools.build:gradle:7.4.0-alpha03")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0")
-    implementation("com.diffplug.spotless:spotless-plugin-gradle:6.7.2")
+    implementation(libs.androidGradlePlugin)
+    implementation(libs.kotlinGradlePlugin)
+    implementation(libs.spotlessGradlePlugin)
 }
 
 gradlePlugin {

@@ -1,5 +1,11 @@
 [versions]
+androidGradlePlugin = "7.4.0-alpha03"
+kotlin = "1.7.0"
+spotless = "6.7.2"
 androidDesugarJdkLibs = "1.1.5"
 
 [libraries]
+androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+spotlessGradlePlugin = { group = "com.diffplug.spotless", name = "spotless-plugin-gradle", version.ref = "spotless" }
 androidDesugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
