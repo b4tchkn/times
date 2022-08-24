@@ -1,6 +1,8 @@
 plugins {
     id("com.b4tchkn.primitive.androidapplication")
     id("com.b4tchkn.primitive.spotless")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -23,6 +25,10 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.retrofitConverterSimplexml)
+    implementation(libs.okhttp)
+
+    implementation(libs.kotlinSerializationJson)
+    implementation(libs.retrofitKotlinSerializationConverter)
 
     implementation(libs.junit)
     implementation(libs.androidxTestExtJunit)
