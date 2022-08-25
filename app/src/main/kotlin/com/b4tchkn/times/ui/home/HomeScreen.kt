@@ -13,7 +13,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = viewModel(),
 ) {
     val news by viewModel.news.collectAsState()
-    val newsTopHeadlines by viewModel.news.collectAsState()
+    val newsTopHeadlines by viewModel.newsTopHeadlines.collectAsState()
     val googleNews by viewModel.googleNews.collectAsState()
 
     LaunchedEffect(key1 = Unit) {
