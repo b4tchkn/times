@@ -15,8 +15,8 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    val newsApiService: NewsApiService,
-    val googleNewsService: GoogleNewsService,
+    private val newsApiService: NewsApiService,
+    private val googleNewsService: GoogleNewsService,
 ) : ViewModel() {
 
     private val _news = MutableStateFlow<NewsModel?>(null)
