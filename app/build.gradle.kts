@@ -3,6 +3,8 @@ plugins {
     id("com.b4tchkn.primitive.spotless")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("kotlinx-serialization")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -12,6 +14,10 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.2.0"
     }
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 dependencies {
@@ -29,6 +35,9 @@ dependencies {
 
     implementation(libs.kotlinSerializationJson)
     implementation(libs.retrofitKotlinSerializationConverter)
+
+    implementation(libs.daggerHiltAndroid)
+    kapt(libs.daggerHiltAndroidCompiler)
 
     implementation(libs.junit)
     implementation(libs.androidxTestExtJunit)
