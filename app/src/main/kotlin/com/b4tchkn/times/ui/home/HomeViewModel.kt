@@ -2,9 +2,9 @@ package com.b4tchkn.times.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.b4tchkn.times.data.GoogleNewsService
 import com.b4tchkn.times.data.GoogleNewsServiceTopicType
 import com.b4tchkn.times.data.NewsApiService
+import com.b4tchkn.times.domain.GetGoogleTopicNewsUseCase
 import com.b4tchkn.times.model.GoogleNewsRssModel
 import com.b4tchkn.times.model.NewsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val newsApiService: NewsApiService,
-    private val googleNewsService: GoogleNewsService,
+    private val getGoogleTopicNewsUseCase: GetGoogleTopicNewsUseCase,
 ) : ViewModel() {
 
     private val _news = MutableStateFlow<NewsModel?>(null)
@@ -52,8 +52,7 @@ class HomeViewModel @Inject constructor(
     suspend fun fetchGoogleNews() {
         viewModelScope.launch {
             try {
-                _googleNews.value =
-                    googleNewsService.getTopicNews(topic = GoogleNewsServiceTopicType.WORLD.name)
+                _googleNews.value = getGoogleTopicNewsUseCase(GoogleNewsServiceTopicType.BUSINESS)
             } catch (e: Exception) {
             }
         }
