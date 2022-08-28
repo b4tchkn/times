@@ -1,15 +1,17 @@
 package com.b4tchkn.times.domain
 
 import com.b4tchkn.times.data.NewsApiService
+import com.b4tchkn.times.di.IODispatcher
 import com.b4tchkn.times.model.NewsModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 
 class GetNewsTopHeadlinesUseCase @Inject constructor(
     private val newsApiService: NewsApiService,
+    @IODispatcher private val ioDispatcher: CoroutineDispatcher,
 ) {
-    suspend operator fun invoke(): NewsModel = withContext(Dispatchers.IO) {
+    suspend operator fun invoke(): NewsModel = withContext(ioDispatcher) {
         newsApiService.getTopHeadlines()
     }
 }
