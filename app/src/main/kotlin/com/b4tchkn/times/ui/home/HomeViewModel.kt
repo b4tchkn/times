@@ -3,19 +3,21 @@ package com.b4tchkn.times.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.b4tchkn.times.data.GoogleNewsServiceTopicType
-import com.b4tchkn.times.data.NewsApiService
 import com.b4tchkn.times.domain.GetGoogleTopicNewsUseCase
+import com.b4tchkn.times.domain.GetNewsEverythingUseCase
+import com.b4tchkn.times.domain.GetNewsTopHeadlinesUseCase
 import com.b4tchkn.times.model.GoogleNewsRssModel
 import com.b4tchkn.times.model.NewsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val newsApiService: NewsApiService,
+    private val getNewsTopHeadlinesUseCase: GetNewsTopHeadlinesUseCase,
+    private val getNewsEverythingUseCase: GetNewsEverythingUseCase,
     private val getGoogleTopicNewsUseCase: GetGoogleTopicNewsUseCase,
 ) : ViewModel() {
 
@@ -34,7 +36,7 @@ class HomeViewModel @Inject constructor(
     suspend fun fetchNewsEverything() {
         viewModelScope.launch {
             try {
-                _news.value = newsApiService.getEverything()
+                _news.value = getNewsEverythingUseCase()
             } catch (e: Exception) {
             }
         }
@@ -43,7 +45,7 @@ class HomeViewModel @Inject constructor(
     suspend fun fetchNewsTopHeadlines() {
         viewModelScope.launch {
             try {
-                _newsTopHeadlines.value = newsApiService.getTopHeadlines()
+                _newsTopHeadlines.value = getNewsTopHeadlinesUseCase()
             } catch (e: Exception) {
             }
         }
