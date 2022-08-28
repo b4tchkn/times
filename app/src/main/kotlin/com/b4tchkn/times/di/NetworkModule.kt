@@ -1,4 +1,4 @@
-package com.b4tchkn.times.module
+package com.b4tchkn.times.di
 
 import com.b4tchkn.times.Constants
 import com.b4tchkn.times.data.GoogleNewsService
