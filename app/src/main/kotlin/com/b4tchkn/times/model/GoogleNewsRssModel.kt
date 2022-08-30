@@ -18,4 +18,11 @@ data class GoogleNewsRssModel @JvmOverloads constructor(
     @field:Path("channel")
     @param:Path("channel")
     val articles: List<GoogleNewsArticleModel>
-)
+) {
+    companion object {
+        val defaultInstance = GoogleNewsRssModel(
+            title = "",
+            articles = listOf(),
+        )
+    }
+}

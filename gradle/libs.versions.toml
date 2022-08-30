@@ -1,6 +1,7 @@
 [versions]
 androidGradlePlugin = "7.2.2"
 kotlin = "1.7.0"
+kotlinCoroutine = "1.6.4"
 secretsGradlePlugin = "2.0.1"
 spotless = "6.7.2"
 ktlint = "0.43.0"
@@ -40,9 +41,11 @@ androidxTestEspressoCore = { group = "androidx.test.espresso", name = "espresso-
 composeUiTestJunit = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
 composeUiTooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
 composeUiTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose" }
+kotlinCoroutineTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinCoroutine" }
 
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofitConverterSimplexml = { group = "com.squareup.retrofit2", name = "converter-simplexml", version.ref = "retrofit" }
+retrofitMock = { group = "com.squareup.retrofit2", name = "retrofit-mock", version.ref = "retrofit" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 
 kotlinSerializationJson = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }
