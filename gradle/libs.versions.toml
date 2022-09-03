@@ -1,6 +1,7 @@
 [versions]
 androidGradlePlugin = "7.2.2"
 kotlin = "1.7.0"
+kotlinCoroutine = "1.6.4"
 secretsGradlePlugin = "2.0.1"
 spotless = "6.7.2"
 ktlint = "0.43.0"
@@ -14,6 +15,7 @@ androidxActivity = "1.5.1"
 junit = "4.13.2"
 androidxTestExt = "1.1.3"
 androidxTestEspresso = "3.4.0"
+mockitoKotlin = "4.0.0"
 
 retrofit = "2.9.0"
 okhttp = "4.10.0"
@@ -40,6 +42,8 @@ androidxTestEspressoCore = { group = "androidx.test.espresso", name = "espresso-
 composeUiTestJunit = { group = "androidx.compose.ui", name = "ui-test-junit4", version.ref = "compose" }
 composeUiTooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
 composeUiTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version.ref = "compose" }
+kotlinCoroutineTest = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinCoroutine" }
+mockitoKotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
 
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofitConverterSimplexml = { group = "com.squareup.retrofit2", name = "converter-simplexml", version.ref = "retrofit" }
