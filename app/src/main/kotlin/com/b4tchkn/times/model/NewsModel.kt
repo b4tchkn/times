@@ -11,4 +11,11 @@ data class NewsModel(
     val totalResults: Int,
     @JsonNames("articles")
     val articles: List<NewsArticleModel>,
-)
+) {
+    companion object {
+        val defaultInstance = NewsModel(
+            totalResults = 0,
+            articles = listOf(),
+        )
+    }
+}

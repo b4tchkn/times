@@ -35,37 +35,40 @@ class HomeViewModel @Inject constructor(
 
     suspend fun fetchNewsEverything() {
         viewModelScope.launch {
-            try {
-                getNewsEverythingUseCase().collect {
+            getNewsEverythingUseCase().fold(
+                onSuccess = {
                     _news.value = it
+                },
+                onFailure = {
+                    // TODO: handle error
                 }
-            } catch (e: Exception) {
-                // TODO: handle error
-            }
+            )
         }
     }
 
     suspend fun fetchNewsTopHeadlines() {
         viewModelScope.launch {
-            try {
-                getNewsTopHeadlinesUseCase().collect {
+            getNewsTopHeadlinesUseCase().fold(
+                onSuccess = {
                     _newsTopHeadlines.value = it
-                }
-            } catch (e: Exception) {
-                // TODO: handle error
-            }
+                },
+                onFailure = {
+                    // TODO: handle error
+                },
+            )
         }
     }
 
     suspend fun fetchGoogleNews() {
         viewModelScope.launch {
-            try {
-                getGoogleTopicNewsUseCase(GoogleNewsServiceTopicType.BUSINESS).collect {
+            getGoogleTopicNewsUseCase(GoogleNewsServiceTopicType.BUSINESS).fold(
+                onSuccess = {
                     _googleNews.value = it
-                }
-            } catch (e: Exception) {
-                // TODO: handle error
-            }
+                },
+                onFailure = {
+                    // TODO: handle error
+                },
+            )
         }
     }
 }

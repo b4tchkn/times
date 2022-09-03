@@ -1,38 +1,54 @@
 package com.b4tchkn.times.domain
 
+import com.b4tchkn.times.UseCaseTest
 import com.b4tchkn.times.data.GoogleNewsService
 import com.b4tchkn.times.data.GoogleNewsServiceTopicType
-import com.b4tchkn.times.data.MockGoogleNewsService
 import com.b4tchkn.times.model.GoogleNewsRssModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import retrofit2.Retrofit
-import retrofit2.mock.MockRetrofit
-import retrofit2.mock.NetworkBehavior
+import org.mockito.Mock
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doThrow
+import org.mockito.kotlin.whenever
 
-class GetGoogleTopicNewsUseCaseTest {
-    lateinit var mockGoogleNewsService: MockGoogleNewsService
+@OptIn(ExperimentalCoroutinesApi::class)
+class GetGoogleTopicNewsUseCaseTest : UseCaseTest() {
+    @Mock
+    lateinit var googleNewsService: GoogleNewsService
+    lateinit var getGoogleTopicNewsUseCase: GetGoogleTopicNewsUseCase
 
     @Before
     fun setup() {
-        val retrofit = Retrofit.Builder().baseUrl("https://example.com").build()
-        val behavior = NetworkBehavior.create()
-        val mockRetrofit = MockRetrofit.Builder(retrofit).networkBehavior(behavior).build()
-        val delegate = mockRetrofit.create(GoogleNewsService::class.java)
-        mockGoogleNewsService = MockGoogleNewsService(delegate)
+        getGoogleTopicNewsUseCase = GetGoogleTopicNewsUseCase(googleNewsService)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun useCase_Success() = runTest {
-        val res = mockGoogleNewsService.getTopicNews(GoogleNewsServiceTopicType.BUSINESS.name)
+        val model = GoogleNewsRssModel.defaultInstance
+        whenever(googleNewsService.getTopicNews(any())).thenReturn(model)
+
+        val response = getGoogleTopicNewsUseCase(GoogleNewsServiceTopicType.BUSINESS)
 
         Assert.assertEquals(
-            res,
-            GoogleNewsRssModel.defaultInstance
+            Result.success(model),
+            response,
+        )
+    }
+
+    @Test
+    fun useCase_Failure() = runTest {
+        val exception = RuntimeException()
+        doThrow(exception).whenever(googleNewsService)
+            .getTopicNews(GoogleNewsServiceTopicType.BUSINESS.name)
+
+        val response = getGoogleTopicNewsUseCase(GoogleNewsServiceTopicType.BUSINESS)
+
+        Assert.assertEquals(
+            Result.failure<Exception>(exception),
+            response,
         )
     }
 }

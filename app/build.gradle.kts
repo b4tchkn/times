@@ -43,8 +43,8 @@ dependencies {
     implementation(libs.androidxTestExtJunit)
     implementation(libs.androidxTestEspressoCore)
     androidTestImplementation(libs.composeUiTestJunit)
-    implementation(libs.retrofitMock)
     testImplementation(libs.kotlinCoroutineTest)
+    testImplementation(libs.mockitoKotlin)
 
     debugImplementation(libs.composeUiTooling)
     debugImplementation(libs.composeUiTestManifest)
