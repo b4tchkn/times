@@ -1,6 +1,7 @@
 package com.b4tchkn.times.ui.top
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -12,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
@@ -45,8 +47,10 @@ fun TopScreen(
         }
     }
 
-    Scaffold(scaffoldState = scaffoldState) {
-        Box {
+    Scaffold(
+        scaffoldState = scaffoldState,
+    ) {
+        Box(modifier = Modifier.padding(top = it.calculateTopPadding())) {
             Text(text = state.news.articles.toString())
             if (loading) CircularProgressIndicator()
         }
