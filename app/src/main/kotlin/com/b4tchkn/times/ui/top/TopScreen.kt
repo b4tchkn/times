@@ -1,58 +1,27 @@
 package com.b4tchkn.times.ui.top
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.b4tchkn.times.ui.top.model.TopAction
-import com.b4tchkn.times.ui.top.model.TopSideEffect
+import com.b4tchkn.times.ui.component.LoadIndicator
 
 @Composable
 fun TopScreen(
-    viewModel: TopStoreViewModel = viewModel()
+    modifier: Modifier,
+    paddingValues: PaddingValues,
+    topState: TopState,
+    loading: Boolean,
 ) {
-    val lifecycleOwner = LocalLifecycleOwner.current
-    val state by viewModel.uiState.collectAsState()
-    var loading by remember { mutableStateOf(false) }
-    val scaffoldState = rememberScaffoldState()
-    val snackbarHostState = scaffoldState.snackbarHostState
-
-    LaunchedEffect(Unit) {
-        lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-            viewModel.dispatch(TopAction.Init)
-            viewModel.sideEffect.collect {
-                when (it) {
-                    TopSideEffect.Error -> {
-                        snackbarHostState.showSnackbar("エラー")
-                    }
-                    is TopSideEffect.Load -> {
-                        loading = it.loading
-                    }
-                }
-            }
-        }
-    }
-
-    Scaffold(
-        scaffoldState = scaffoldState,
+    Box(
+        modifier = Modifier
+            .padding(
+                top = paddingValues.calculateTopPadding(),
+            ),
     ) {
-        Box(modifier = Modifier.padding(top = it.calculateTopPadding())) {
-            Text(text = state.news.articles.toString())
-            if (loading) CircularProgressIndicator()
-        }
+        Text(text = topState.news.articles.toString())
+        if (loading) LoadIndicator()
     }
 }

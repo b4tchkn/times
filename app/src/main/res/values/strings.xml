@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">times</string>
+    <string name="app_name">TIMES</string>
+    <string name="snackbar_error">不明なエラーが発生しました</string>
+
+
+    <!--  For Semantics  -->
+    <string name="semantics_search">検索</string>
 </resources>
