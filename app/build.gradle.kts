@@ -45,6 +45,7 @@ dependencies {
     androidTestImplementation(libs.composeUiTestJunit)
     testImplementation(libs.kotlinCoroutineTest)
     testImplementation(libs.mockitoKotlin)
+    testImplementation(libs.mockitoInline)
 
     debugImplementation(libs.composeUiTooling)
     debugImplementation(libs.composeUiTestManifest)
