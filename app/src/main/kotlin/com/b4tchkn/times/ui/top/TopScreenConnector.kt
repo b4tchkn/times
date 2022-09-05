@@ -20,11 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.b4tchkn.times.R
+import com.b4tchkn.times.ui.theme.AppColor
 import com.b4tchkn.times.ui.top.model.TopAction
 import com.b4tchkn.times.ui.top.model.TopSideEffect
 
@@ -65,7 +65,7 @@ fun TopScreenConnector(
             TopAppBar {
                 Text(
                     text = stringResource(id = R.string.app_name),
-                    fontWeight = FontWeight.Bold,
+                    color = AppColor.White,
                 )
                 Spacer(modifier = Modifier.weight(1.0f))
                 IconButton(onClick = { /*TODO*/ }) {
