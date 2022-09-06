@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.b4tchkn.times.State
 import com.b4tchkn.times.StoreViewModel
 import com.b4tchkn.times.model.GoogleNewsRssModel
+import com.b4tchkn.times.model.NewsModel
 import com.b4tchkn.times.ui.top.model.TopAction
 import com.b4tchkn.times.ui.top.model.TopSideEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,11 +35,13 @@ class TopStoreViewModel @Inject constructor(
 }
 
 data class TopState(
-    val news: GoogleNewsRssModel,
+    val googleNews: GoogleNewsRssModel?,
+    val topHeadlines: NewsModel?,
 ) : State {
     companion object {
         val init = TopState(
-            news = GoogleNewsRssModel.defaultInstance,
+            googleNews = GoogleNewsRssModel.defaultInstance,
+            topHeadlines = NewsModel.defaultInstance,
         )
     }
 }
