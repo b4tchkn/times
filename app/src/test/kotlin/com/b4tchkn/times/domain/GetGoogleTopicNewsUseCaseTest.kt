@@ -4,6 +4,7 @@ import com.b4tchkn.times.UseCaseTest
 import com.b4tchkn.times.data.GoogleNewsService
 import com.b4tchkn.times.data.GoogleNewsServiceTopicType
 import com.b4tchkn.times.model.GoogleNewsRssModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
@@ -24,7 +25,10 @@ class GetGoogleTopicNewsUseCaseTest : UseCaseTest() {
 
     @Before
     fun setup() {
-        getGoogleTopicNewsUseCase = GetGoogleTopicNewsUseCase(googleNewsService)
+        getGoogleTopicNewsUseCase = GetGoogleTopicNewsUseCase(
+            googleNewsService,
+            Dispatchers.IO,
+        )
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.b4tchkn.times.domain
 import com.b4tchkn.times.UseCaseTest
 import com.b4tchkn.times.data.NewsApiService
 import com.b4tchkn.times.model.NewsModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
@@ -22,7 +23,10 @@ class GetNewsTopHeadlinesUseCaseTest : UseCaseTest() {
 
     @Before
     fun setup() {
-        getNewsTopHeadlinesUseCase = GetNewsTopHeadlinesUseCase(newsApiService)
+        getNewsTopHeadlinesUseCase = GetNewsTopHeadlinesUseCase(
+            newsApiService,
+            Dispatchers.IO,
+        )
     }
 
     @Test
