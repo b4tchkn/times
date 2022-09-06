@@ -3,7 +3,10 @@ package com.b4tchkn.times.domain
 import com.b4tchkn.times.UseCaseTest
 import com.b4tchkn.times.data.NewsApiService
 import com.b4tchkn.times.model.NewsModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
@@ -20,7 +23,10 @@ class GetNewsTopHeadlinesUseCaseTest : UseCaseTest() {
 
     @Before
     fun setup() {
-        getNewsTopHeadlinesUseCase = GetNewsTopHeadlinesUseCase(newsApiService)
+        getNewsTopHeadlinesUseCase = GetNewsTopHeadlinesUseCase(
+            newsApiService,
+            Dispatchers.IO,
+        )
     }
 
     @Test
@@ -31,8 +37,8 @@ class GetNewsTopHeadlinesUseCaseTest : UseCaseTest() {
         val response = getNewsTopHeadlinesUseCase()
 
         Assert.assertEquals(
-            Result.success(model),
-            response,
+            flowOf(Result.success(model)).first(),
+            response.first(),
         )
     }
 
@@ -44,8 +50,8 @@ class GetNewsTopHeadlinesUseCaseTest : UseCaseTest() {
         val response = getNewsTopHeadlinesUseCase()
 
         Assert.assertEquals(
-            Result.failure<Exception>(exception),
-            response,
+            flowOf(Result.failure<Exception>(exception)).first(),
+            response.first(),
         )
     }
 }

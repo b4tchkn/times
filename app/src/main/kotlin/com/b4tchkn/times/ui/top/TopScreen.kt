@@ -1,58 +1,62 @@
 package com.b4tchkn.times.ui.top
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.b4tchkn.times.ui.top.model.TopAction
-import com.b4tchkn.times.ui.top.model.TopSideEffect
+import androidx.compose.ui.unit.dp
+import com.b4tchkn.times.ui.component.AppDivider
+import com.b4tchkn.times.ui.component.Gap
+import com.b4tchkn.times.ui.component.LoadIndicator
 
 @Composable
 fun TopScreen(
-    viewModel: TopStoreViewModel = viewModel()
+    modifier: Modifier,
+    paddingValues: PaddingValues,
+    topState: TopState,
+    loading: Boolean,
 ) {
-    val lifecycleOwner = LocalLifecycleOwner.current
-    val state by viewModel.uiState.collectAsState()
-    var loading by remember { mutableStateOf(false) }
-    val scaffoldState = rememberScaffoldState()
-    val snackbarHostState = scaffoldState.snackbarHostState
-
-    LaunchedEffect(Unit) {
-        lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-            viewModel.dispatch(TopAction.Init)
-            viewModel.sideEffect.collect {
-                when (it) {
-                    TopSideEffect.Error -> {
-                        snackbarHostState.showSnackbar("エラー")
-                    }
-                    is TopSideEffect.Load -> {
-                        loading = it.loading
-                    }
+    val googleNewsArticles = topState.googleNews?.articles
+    val topHeadlines = topState.topHeadlines?.articles
+    Box(
+        modifier = Modifier
+            .padding(
+                top = paddingValues.calculateTopPadding(),
+            ),
+    ) {
+        LazyColumn {
+            item {
+                val article = topHeadlines?.firstOrNull() ?: return@item
+                Column {
+                    Text(text = article.title ?: "")
+                    Text(text = article.content ?: "")
+                    Text(text = article.description ?: "")
+                    Text(text = article.urlToImage ?: "")
                 }
             }
+            item {
+                Gap(16.dp)
+            }
+            items(googleNewsArticles?.size ?: 0) { index ->
+                val article = googleNewsArticles?.get(index) ?: return@items
+                TopArticleItem(
+                    modifier = Modifier.clickable { },
+                    title = article.title,
+                    source = article.source,
+                    publishDate = article.pubDate,
+                )
+                AppDivider(
+                    startIndent = 16.dp,
+                    endIndent = 16.dp,
+                    thickness = 2.dp,
+                )
+            }
         }
-    }
-
-    Scaffold(
-        scaffoldState = scaffoldState,
-    ) {
-        Box(modifier = Modifier.padding(top = it.calculateTopPadding())) {
-            Text(text = state.news.articles.toString())
-            if (loading) CircularProgressIndicator()
-        }
+        if (loading) LoadIndicator()
     }
 }

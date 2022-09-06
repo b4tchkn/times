@@ -4,7 +4,10 @@ import com.b4tchkn.times.UseCaseTest
 import com.b4tchkn.times.data.GoogleNewsService
 import com.b4tchkn.times.data.GoogleNewsServiceTopicType
 import com.b4tchkn.times.model.GoogleNewsRssModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
@@ -22,7 +25,10 @@ class GetGoogleTopicNewsUseCaseTest : UseCaseTest() {
 
     @Before
     fun setup() {
-        getGoogleTopicNewsUseCase = GetGoogleTopicNewsUseCase(googleNewsService)
+        getGoogleTopicNewsUseCase = GetGoogleTopicNewsUseCase(
+            googleNewsService,
+            Dispatchers.IO,
+        )
     }
 
     @Test
@@ -33,8 +39,8 @@ class GetGoogleTopicNewsUseCaseTest : UseCaseTest() {
         val response = getGoogleTopicNewsUseCase(GoogleNewsServiceTopicType.BUSINESS)
 
         Assert.assertEquals(
-            Result.success(model),
-            response,
+            flowOf(Result.success(model)).first(),
+            response.first(),
         )
     }
 
@@ -47,8 +53,8 @@ class GetGoogleTopicNewsUseCaseTest : UseCaseTest() {
         val response = getGoogleTopicNewsUseCase(GoogleNewsServiceTopicType.BUSINESS)
 
         Assert.assertEquals(
-            Result.failure<Exception>(exception),
-            response,
+            flowOf(Result.failure<Exception>(exception)).first(),
+            response.first(),
         )
     }
 }
