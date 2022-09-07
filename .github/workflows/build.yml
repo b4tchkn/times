@@ -22,7 +22,9 @@ jobs:
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Setup local.properties
-        run: echo "newsApiKey=xxxxxx" > local.properties
+        run: |
+          echo "newsApiKey=xxxxxx" >> local.properties
+          echo "openWeatherApiKey=xxxxx" >> local.properties
 
       - name: Set up JDK 11
         uses: actions/setup-java@v3
