@@ -23,6 +23,7 @@ fun TopScreen(
 ) {
     val googleNewsArticles = topState.googleNews?.articles
     val topHeadlines = topState.topHeadlines?.articles
+    val currentWeather = topState.currentWeather
     Box(
         modifier = Modifier
             .padding(
@@ -30,6 +31,12 @@ fun TopScreen(
             ),
     ) {
         LazyColumn {
+            item {
+                Text(text = currentWeather?.weather?.firstOrNull()?.description.toString())
+            }
+            item {
+                Gap(padding = 16.dp)
+            }
             item {
                 val article = topHeadlines?.firstOrNull() ?: return@item
                 Column {

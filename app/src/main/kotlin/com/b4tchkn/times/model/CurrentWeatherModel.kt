@@ -11,7 +11,7 @@ data class CurrentWeatherModel(
     val coord: CoordModel,
 
     @JsonNames("weather")
-    val weather: WeatherModel,
+    val weather: List<WeatherModel>,
 
     @JsonNames("main")
     val main: MainModel,
@@ -93,7 +93,7 @@ data class CurrentWeatherModel(
     companion object {
         val defaultInstance = CurrentWeatherModel(
             coord = CoordModel.defaultInstance,
-            weather = WeatherModel.defaultInstance,
+            weather = listOf(),
             main = MainModel.defaultInstance,
         )
     }

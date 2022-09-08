@@ -3,6 +3,7 @@ package com.b4tchkn.times.ui.top
 import androidx.lifecycle.viewModelScope
 import com.b4tchkn.times.State
 import com.b4tchkn.times.StoreViewModel
+import com.b4tchkn.times.model.CurrentWeatherModel
 import com.b4tchkn.times.model.GoogleNewsRssModel
 import com.b4tchkn.times.model.NewsModel
 import com.b4tchkn.times.ui.top.model.TopAction
@@ -37,11 +38,13 @@ class TopStoreViewModel @Inject constructor(
 data class TopState(
     val googleNews: GoogleNewsRssModel?,
     val topHeadlines: NewsModel?,
+    val currentWeather: CurrentWeatherModel?,
 ) : State {
     companion object {
         val init = TopState(
             googleNews = GoogleNewsRssModel.defaultInstance,
             topHeadlines = NewsModel.defaultInstance,
+            currentWeather = CurrentWeatherModel.defaultInstance,
         )
     }
 }
