@@ -1,8 +1,10 @@
 package com.b4tchkn.times.ui
 
 import com.b4tchkn.times.UseCaseTest
+import com.b4tchkn.times.domain.GetCurrentWeatherUseCase
 import com.b4tchkn.times.domain.GetGoogleTopicNewsUseCase
 import com.b4tchkn.times.domain.GetNewsTopHeadlinesUseCase
+import com.b4tchkn.times.model.CurrentWeatherModel
 import com.b4tchkn.times.model.GoogleNewsRssModel
 import com.b4tchkn.times.model.NewsModel
 import com.b4tchkn.times.ui.top.TopProducer
@@ -26,13 +28,17 @@ class TopProducerTest : UseCaseTest() {
     @Mock
     lateinit var getNewsTopHeadlinesUseCase: GetNewsTopHeadlinesUseCase
 
-    lateinit var topProducer: TopProducer
+    @Mock
+    lateinit var getCurrentWeatherUseCase: GetCurrentWeatherUseCase
+
+    private lateinit var topProducer: TopProducer
 
     @Before
     fun setup() {
         topProducer = TopProducer(
             getGoogleTopicNewsUseCase,
             getNewsTopHeadlinesUseCase,
+            getCurrentWeatherUseCase,
         )
     }
 
@@ -41,14 +47,27 @@ class TopProducerTest : UseCaseTest() {
         val action = TopAction.Init
         val googleNewsModel = GoogleNewsRssModel.defaultInstance
         val topHeadlinesModel = NewsModel.defaultInstance
+        val currentWeatherModel = CurrentWeatherModel.defaultInstance
         whenever(getGoogleTopicNewsUseCase(any()))
             .thenReturn(flowOf(Result.success(googleNewsModel)))
         whenever(getNewsTopHeadlinesUseCase()).thenReturn(flowOf(Result.success(topHeadlinesModel)))
-        val currentState = TopState(googleNews = googleNewsModel, topHeadlines = topHeadlinesModel)
+        whenever(
+            getCurrentWeatherUseCase(any(), any())
+        ).thenReturn(flowOf(Result.success(currentWeatherModel)))
+        val currentState = TopState(
+            googleNews = googleNewsModel,
+            topHeadlines = topHeadlinesModel,
+            currentWeather = currentWeatherModel,
+        )
         val newState = topProducer.reduce(currentState, action)
 
         Assert.assertEquals(
-            TopState(googleNews = googleNewsModel, topHeadlines = topHeadlinesModel), newState,
+            TopState(
+                googleNews = googleNewsModel,
+                topHeadlines = topHeadlinesModel,
+                currentWeather = currentWeatherModel,
+            ),
+            newState,
         )
     }
 }
