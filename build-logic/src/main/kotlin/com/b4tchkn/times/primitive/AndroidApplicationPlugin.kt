@@ -19,7 +19,7 @@ class AndroidApplicationPlugin : Plugin<Project> {
             }
 
             extensions.configure<BaseAppModuleExtension> {
-                compileSdk = 32
+                compileSdk = 33
 
                 defaultConfig {
                     applicationId = "com.b4tchkn.times"
