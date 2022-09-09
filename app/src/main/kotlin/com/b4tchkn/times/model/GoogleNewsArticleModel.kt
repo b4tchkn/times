@@ -14,6 +14,7 @@ data class GoogleNewsArticleModel(
         fun fromV1(response: GoogleNewsArticleResponse): GoogleNewsArticleModel {
             // val formatter = DateTimeFormatter.ofPattern("")
             // val publishedAt = LocalDateTime.parse(response.pubDate, formatter)
+            // ex) Fri, 09 Sep 2022 14:16:44 GMT
             return GoogleNewsArticleModel(
                 title = response.title,
                 link = response.title,

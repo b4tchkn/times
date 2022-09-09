@@ -44,7 +44,7 @@ fun TopScreen(
                     Text(text = article.content ?: "")
                     Text(text = article.description ?: "")
                     Text(text = article.urlToImage ?: "")
-                    Text(text = article.publishedAt ?: "")
+                    Text(text = article.publishedAt.toString())
                 }
             }
             item {
