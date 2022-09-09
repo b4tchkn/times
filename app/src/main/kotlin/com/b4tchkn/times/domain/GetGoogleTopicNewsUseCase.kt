@@ -3,6 +3,7 @@ package com.b4tchkn.times.domain
 import com.b4tchkn.times.data.GoogleNewsService
 import com.b4tchkn.times.data.GoogleNewsServiceTopicType
 import com.b4tchkn.times.di.IODispatcher
+import com.b4tchkn.times.model.GoogleNewsRssModel
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
@@ -15,7 +16,8 @@ class GetGoogleTopicNewsUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(topicType: GoogleNewsServiceTopicType) = flow {
         val response = googleNewsService.getTopicNews(topicType.name)
-        emit(Result.success(response))
+        val model = GoogleNewsRssModel.fromV1(response)
+        emit(Result.success(model))
     }
         .catch { emit(Result.failure(it)) }
         .flowOn(ioDispatcher)

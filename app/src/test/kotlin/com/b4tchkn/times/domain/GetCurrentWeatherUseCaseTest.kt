@@ -3,6 +3,7 @@ package com.b4tchkn.times.domain
 import com.b4tchkn.times.UseCaseTest
 import com.b4tchkn.times.data.OpenWeatherService
 import com.b4tchkn.times.model.CurrentWeatherModel
+import com.b4tchkn.times.model.response.CurrentWeatherResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -32,11 +33,12 @@ class GetCurrentWeatherUseCaseTest : UseCaseTest() {
 
     @Test
     fun useCase_Success() = runTest {
-        val model = CurrentWeatherModel.defaultInstance
-        whenever(openWeatherService.getCurrentWeather(any(), any())).thenReturn(model)
+        whenever(openWeatherService.getCurrentWeather(any(), any()))
+            .thenReturn(CurrentWeatherResponse.defaultInstance)
 
         val response = getCurrentWeatherUseCase(0.0, 0.0)
 
+        val model = CurrentWeatherModel.defaultInstance
         Assert.assertEquals(
             flowOf(Result.success(model)).first(),
             response.first(),

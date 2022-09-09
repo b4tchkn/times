@@ -4,6 +4,7 @@ import com.b4tchkn.times.UseCaseTest
 import com.b4tchkn.times.data.GoogleNewsService
 import com.b4tchkn.times.data.GoogleNewsServiceTopicType
 import com.b4tchkn.times.model.GoogleNewsRssModel
+import com.b4tchkn.times.model.response.GoogleNewsRssResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -33,11 +34,12 @@ class GetGoogleTopicNewsUseCaseTest : UseCaseTest() {
 
     @Test
     fun useCase_Success() = runTest {
-        val model = GoogleNewsRssModel.defaultInstance
-        whenever(googleNewsService.getTopicNews(any())).thenReturn(model)
+        whenever(googleNewsService.getTopicNews(any()))
+            .thenReturn(GoogleNewsRssResponse.defaultInstance)
 
         val response = getGoogleTopicNewsUseCase(GoogleNewsServiceTopicType.BUSINESS)
 
+        val model = GoogleNewsRssModel.defaultInstance
         Assert.assertEquals(
             flowOf(Result.success(model)).first(),
             response.first(),

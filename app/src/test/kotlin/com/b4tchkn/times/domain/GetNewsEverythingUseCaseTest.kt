@@ -3,6 +3,7 @@ package com.b4tchkn.times.domain
 import com.b4tchkn.times.UseCaseTest
 import com.b4tchkn.times.data.NewsApiService
 import com.b4tchkn.times.model.NewsModel
+import com.b4tchkn.times.model.response.NewsResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -31,11 +32,12 @@ class GetNewsEverythingUseCaseTest : UseCaseTest() {
 
     @Test
     fun useCase_Success() = runTest {
-        val model = NewsModel.defaultInstance
-        whenever(newsApiService.getEverything()).thenReturn(model)
+        whenever(newsApiService.getEverything())
+            .thenReturn(NewsResponse.defaultInstance)
 
         val response = getNewsEverythingUseCase()
 
+        val model = NewsModel.defaultInstance
         Assert.assertEquals(
             flowOf(Result.success(model)).first(),
             response.first(),

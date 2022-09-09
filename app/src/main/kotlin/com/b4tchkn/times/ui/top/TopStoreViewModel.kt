@@ -42,9 +42,9 @@ data class TopState(
 ) : State {
     companion object {
         val init = TopState(
-            googleNews = GoogleNewsRssModel.defaultInstance,
-            topHeadlines = NewsModel.defaultInstance,
-            currentWeather = CurrentWeatherModel.defaultInstance,
+            googleNews = null,
+            topHeadlines = null,
+            currentWeather = null,
         )
     }
 }

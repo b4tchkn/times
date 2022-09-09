@@ -2,6 +2,7 @@ package com.b4tchkn.times.domain
 
 import com.b4tchkn.times.data.NewsApiService
 import com.b4tchkn.times.di.IODispatcher
+import com.b4tchkn.times.model.NewsModel
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
@@ -14,7 +15,8 @@ class GetNewsTopHeadlinesUseCase @Inject constructor(
 ) {
     suspend operator fun invoke() = flow {
         val response = newsApiService.getTopHeadlines()
-        emit(Result.success(response))
+        val model = NewsModel.fromV1(response)
+        emit(Result.success(model))
     }
         .catch { emit(Result.failure(it)) }
         .flowOn(ioDispatcher)

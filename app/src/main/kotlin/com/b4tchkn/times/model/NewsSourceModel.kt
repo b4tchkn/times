@@ -1,12 +1,19 @@
 package com.b4tchkn.times.model
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonNames
+import androidx.annotation.VisibleForTesting
+import com.b4tchkn.times.model.response.NewsSourceResponse
 
-@OptIn(ExperimentalSerializationApi::class)
-@Serializable
 data class NewsSourceModel(
-    @JsonNames("name")
     val name: String?,
-)
+) {
+    companion object {
+        fun fromV1(response: NewsSourceResponse?) = NewsSourceModel(
+            name = response?.name,
+        )
+
+        @VisibleForTesting
+        val defaultInstance = NewsSourceModel(
+            name = null,
+        )
+    }
+}
