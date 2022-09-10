@@ -1,4 +1,4 @@
-package com.b4tchkn.times
+package com.b4tchkn.times.model
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.SharedFlow

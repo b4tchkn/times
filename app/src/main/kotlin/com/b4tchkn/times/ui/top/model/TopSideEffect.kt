@@ -1,6 +1,6 @@
 package com.b4tchkn.times.ui.top.model
 
-import com.b4tchkn.times.SideEffect
+import com.b4tchkn.times.model.SideEffect
 import com.b4tchkn.times.ui.CommonSideEffect
 
 sealed interface TopSideEffect : SideEffect {

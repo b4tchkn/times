@@ -15,11 +15,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
-import com.b4tchkn.times.Action
 import com.b4tchkn.times.R
-import com.b4tchkn.times.SideEffect
-import com.b4tchkn.times.State
-import com.b4tchkn.times.StoreViewModel
+import com.b4tchkn.times.model.Action
+import com.b4tchkn.times.model.SideEffect
+import com.b4tchkn.times.model.State
+import com.b4tchkn.times.model.StoreViewModel
 import com.b4tchkn.times.ui.component.ErrorScreen
 import com.b4tchkn.times.ui.component.LoadIndicator
 import com.b4tchkn.times.ui.top.model.TopSideEffect

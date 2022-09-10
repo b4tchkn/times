@@ -2,16 +2,18 @@ package com.b4tchkn.times.ui.top
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.b4tchkn.times.ui.component.AppDivider
 import com.b4tchkn.times.ui.component.Gap
+import com.b4tchkn.times.ui.top.component.TopArticleItem
+import com.b4tchkn.times.ui.top.component.TopHeader
 
 @Composable
 fun TopScreen(
@@ -29,23 +31,19 @@ fun TopScreen(
     ) {
         LazyColumn {
             item {
-                Text(text = currentWeather?.weather?.description.toString())
-            }
-            item {
-                Gap(padding = 16.dp)
-            }
-            item {
                 val article = topHeadlines?.firstOrNull() ?: return@item
-                Column {
-                    Text(text = article.title ?: "")
-                    Text(text = article.content ?: "")
-                    Text(text = article.description ?: "")
-                    Text(text = article.urlToImage ?: "")
-                    Text(text = article.publishedAt.toString())
+                Box(
+                    contentAlignment = Alignment.TopEnd
+                ) {
+                    TopHeader(article = article) {
+                        // TODO: handle callback
+                    }
+                    val weather = currentWeather?.weather ?: return@item
+                    Text(text = weather.description)
                 }
             }
             item {
-                Gap(16.dp)
+                Gap(32.dp)
             }
             items(googleNewsArticles?.size ?: 0) { index ->
                 val article = googleNewsArticles?.get(index) ?: return@items

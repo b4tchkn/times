@@ -1,10 +1,10 @@
 package com.b4tchkn.times.ui.top
 
-import com.b4tchkn.times.Producer
 import com.b4tchkn.times.data.GoogleNewsServiceTopicType
 import com.b4tchkn.times.domain.GetCurrentWeatherUseCase
 import com.b4tchkn.times.domain.GetGoogleTopicNewsUseCase
 import com.b4tchkn.times.domain.GetNewsTopHeadlinesUseCase
+import com.b4tchkn.times.model.Producer
 import com.b4tchkn.times.ui.CommonSideEffect
 import com.b4tchkn.times.ui.LoadingStatus
 import com.b4tchkn.times.ui.top.model.TopAction

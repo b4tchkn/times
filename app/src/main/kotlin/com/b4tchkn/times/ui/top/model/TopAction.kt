@@ -1,6 +1,6 @@
 package com.b4tchkn.times.ui.top.model
 
-import com.b4tchkn.times.Action
+import com.b4tchkn.times.model.Action
 
 sealed interface TopAction : Action {
     object Init : TopAction

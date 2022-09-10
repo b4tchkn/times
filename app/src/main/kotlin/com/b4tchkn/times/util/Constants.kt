@@ -1,4 +1,4 @@
-package com.b4tchkn.times
+package com.b4tchkn.times.util
 
 class Constants {
     companion object {

@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">TIMES</string>
     <string name="snackbar_error">不明なエラーが発生しました</string>
+    <string name="top_header_article_card_read_article">記事を読む</string>
 
+    <string name="before_min">%1$d分前</string>
+    <string name="before_hour_min">%1$d時間%2$d分前</string>
 
     <!--  For Semantics  -->
     <string name="semantics_search">検索</string>
