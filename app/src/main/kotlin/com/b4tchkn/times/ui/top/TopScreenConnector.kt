@@ -78,7 +78,6 @@ fun TopScreenConnector(
         },
     ) {
         TopScreen(
-            modifier = Modifier,
             paddingValues = it,
             topState = state,
             loading = loading,

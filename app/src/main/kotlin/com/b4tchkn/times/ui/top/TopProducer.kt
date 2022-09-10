@@ -44,12 +44,12 @@ class TopProducer @Inject constructor(
             googleTopicNews,
             topHeadlines,
             currentWeather
-        ) { googleTopicNews, topHeadlines, currentWeather ->
+        ) { googleTopicNewsResult, topHeadlinesResult, currentWeatherResult ->
             _sideEffect.emit(TopSideEffect.Load(loading = false))
             state.copy(
-                googleNews = googleTopicNews.getOrNull(),
-                topHeadlines = topHeadlines.getOrNull(),
-                currentWeather = currentWeather.getOrNull(),
+                googleNews = googleTopicNewsResult.getOrNull(),
+                topHeadlines = topHeadlinesResult.getOrNull(),
+                currentWeather = currentWeatherResult.getOrNull(),
             )
         }.first()
     }
