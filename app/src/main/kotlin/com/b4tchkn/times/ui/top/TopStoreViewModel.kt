@@ -39,8 +39,8 @@ data class TopState(
     val googleNews: GoogleNewsRssModel?,
     val topHeadlines: NewsModel?,
     val currentWeather: CurrentWeatherModel?,
-    val error: Boolean,
-) : State {
+    override val error: Boolean,
+) : State() {
     companion object {
         val init = TopState(
             googleNews = null,

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,14 +27,14 @@ import com.b4tchkn.times.ui.top.model.TopSideEffect
 @Composable
 fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
     modifier: Modifier = Modifier.fillMaxSize(),
-    snackbarHostState: SnackbarHostState,
+    snackbarHostState: SnackbarHostState?,
     storeViewModel: StoreViewModel<ACTION, STATE, SIDE_EFFECT>,
     initAction: ACTION,
-    error: Boolean,
-    screen: @Composable () -> Unit,
+    screen: @Composable (state: STATE) -> Unit,
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
+    val state by storeViewModel.uiState.collectAsState()
     var loadingStatus by remember { mutableStateOf<LoadingStatus?>(null) }
 
     LaunchedEffect(Unit) {
@@ -43,7 +44,7 @@ fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
             storeViewModel.sideEffect.collect {
                 if (it is TopSideEffect.Common) {
                     when (val commonSideEffect = it.commonSideEffect) {
-                        CommonSideEffect.Error -> snackbarHostState.showSnackbar(
+                        CommonSideEffect.Error -> snackbarHostState?.showSnackbar(
                             message = context.getString(
                                 R.string.snackbar_error
                             )
@@ -58,10 +59,10 @@ fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
 
     UIHandler(
         modifier = modifier,
-        error = error,
+        error = state.error,
         loadingStatus = loadingStatus,
     ) {
-        screen()
+        screen(state)
     }
 }
 

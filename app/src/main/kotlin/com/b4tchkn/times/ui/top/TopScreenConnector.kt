@@ -10,8 +10,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -24,30 +22,8 @@ import com.b4tchkn.times.ui.top.model.TopAction
 fun TopScreenConnector(
     viewModel: TopStoreViewModel = viewModel()
 ) {
-    val state by viewModel.uiState.collectAsState()
     val scaffoldState = rememberScaffoldState()
     val snackbarHostState = scaffoldState.snackbarHostState
-
-    // LaunchedEffect(Unit) {
-    //     lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-    //         viewModel.dispatch(TopAction.Init)
-    //         viewModel.sideEffect.collect {
-    //             when (it) {
-    //                 is TopSideEffect.Common -> {
-    //                     when (val common = it.common) {
-    //                         CommonSideEffect.Error -> snackbarHostState.showSnackbar(
-    //                             message = context.getString(
-    //                                 R.string.snackbar_error
-    //                             )
-    //                         )
-    //                         is CommonSideEffect.Load ->
-    //                             loadingStatus = common.loadingStatus
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -71,8 +47,7 @@ fun TopScreenConnector(
             snackbarHostState = snackbarHostState,
             storeViewModel = viewModel,
             initAction = TopAction.Init,
-            error = state.error,
-        ) {
+        ) { state ->
             TopScreen(
                 paddingValues = it,
                 topState = state,
