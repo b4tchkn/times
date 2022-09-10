@@ -16,7 +16,6 @@ import com.b4tchkn.times.ui.component.LoadIndicator
 
 @Composable
 fun TopScreen(
-    modifier: Modifier,
     paddingValues: PaddingValues,
     topState: TopState,
     loading: Boolean,
