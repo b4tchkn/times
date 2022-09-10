@@ -23,6 +23,7 @@ kapt {
 dependencies {
     implementation(libs.androidxCore)
     implementation(libs.composeUi)
+    implementation(libs.coilCompose)
     implementation(libs.composeMaterial)
     implementation(libs.composeUiToolingPreview)
     implementation(libs.androidxLifecycleRuntimeKtx)

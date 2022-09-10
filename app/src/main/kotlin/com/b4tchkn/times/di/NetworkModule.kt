@@ -1,9 +1,9 @@
 package com.b4tchkn.times.di
 
-import com.b4tchkn.times.Constants
 import com.b4tchkn.times.data.GoogleNewsService
 import com.b4tchkn.times.data.NewsApiService
 import com.b4tchkn.times.data.OpenWeatherService
+import com.b4tchkn.times.util.Constants
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
