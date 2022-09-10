@@ -36,7 +36,7 @@ import com.b4tchkn.times.ui.theme.AppColor
 import com.b4tchkn.times.util.formatBeforeDateTimeFromNowString
 
 @Composable
-fun TopHeader(
+fun TopArticleHeader(
     article: NewsArticleModel,
     onClicked: () -> Unit
 ) {

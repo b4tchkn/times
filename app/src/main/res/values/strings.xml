@@ -5,6 +5,8 @@
 
     <string name="before_min">%1$d分前</string>
     <string name="before_hour_min">%1$d時間%2$d分前</string>
+    <string name="unit_temp">℃</string>
+    <string name="MMdd_dayOfWeek">%1$d月%2$d日（%3$s）</string>
 
     <!--  For Semantics  -->
     <string name="semantics_search">検索</string>

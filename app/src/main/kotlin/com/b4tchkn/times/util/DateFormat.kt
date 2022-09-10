@@ -20,3 +20,14 @@ fun formatBeforeDateTimeFromNowString(context: Context, dateTime: LocalDateTime)
         context.getString(R.string.before_min, minDiff)
     }
 }
+
+fun formatDayOfWeekJp(value: Int) = when (value) {
+    1 -> "月"
+    2 -> "火"
+    3 -> "水"
+    4 -> "木"
+    5 -> "金"
+    6 -> "土"
+    7 -> "日"
+    else -> ""
+}
