@@ -10,57 +10,44 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.b4tchkn.times.R
 import com.b4tchkn.times.ui.Connector
-import com.b4tchkn.times.ui.LoadingStatus
 import com.b4tchkn.times.ui.theme.AppColor
 import com.b4tchkn.times.ui.top.model.TopAction
-import com.b4tchkn.times.ui.top.model.TopSideEffect
 
 @Composable
 fun TopScreenConnector(
     viewModel: TopStoreViewModel = viewModel()
 ) {
-    val lifecycleOwner = LocalLifecycleOwner.current
     val state by viewModel.uiState.collectAsState()
-    var loadingStatus by remember { mutableStateOf<LoadingStatus?>(null) }
-    val context = LocalContext.current
     val scaffoldState = rememberScaffoldState()
     val snackbarHostState = scaffoldState.snackbarHostState
 
-    LaunchedEffect(Unit) {
-        lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-            viewModel.dispatch(TopAction.Init)
-            viewModel.sideEffect.collect {
-                when (it) {
-                    is TopSideEffect.Error -> {
-                        snackbarHostState.showSnackbar(
-                            message = context.getString(
-                                R.string.snackbar_error
-                            )
-                        )
-                    }
-                    is TopSideEffect.Load -> {
-                        println("@@@@@ effect = $it")
-                        loadingStatus = it.loadingStatus
-                    }
-                }
-            }
-        }
-    }
+    // LaunchedEffect(Unit) {
+    //     lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+    //         viewModel.dispatch(TopAction.Init)
+    //         viewModel.sideEffect.collect {
+    //             when (it) {
+    //                 is TopSideEffect.Common -> {
+    //                     when (val common = it.common) {
+    //                         CommonSideEffect.Error -> snackbarHostState.showSnackbar(
+    //                             message = context.getString(
+    //                                 R.string.snackbar_error
+    //                             )
+    //                         )
+    //                         is CommonSideEffect.Load ->
+    //                             loadingStatus = common.loadingStatus
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -81,7 +68,9 @@ fun TopScreenConnector(
         },
     ) {
         Connector(
-            loadingStatus = loadingStatus,
+            snackbarHostState = snackbarHostState,
+            storeViewModel = viewModel,
+            initAction = TopAction.Init,
             error = state.error,
         ) {
             TopScreen(

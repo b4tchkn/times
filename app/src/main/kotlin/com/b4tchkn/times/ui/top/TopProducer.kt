@@ -5,15 +5,16 @@ import com.b4tchkn.times.data.GoogleNewsServiceTopicType
 import com.b4tchkn.times.domain.GetCurrentWeatherUseCase
 import com.b4tchkn.times.domain.GetGoogleTopicNewsUseCase
 import com.b4tchkn.times.domain.GetNewsTopHeadlinesUseCase
+import com.b4tchkn.times.ui.CommonSideEffect
 import com.b4tchkn.times.ui.LoadingStatus
 import com.b4tchkn.times.ui.top.model.TopAction
 import com.b4tchkn.times.ui.top.model.TopSideEffect
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
-import javax.inject.Inject
 
 class TopProducer @Inject constructor(
     private val getGoogleTopicNewsUseCase: GetGoogleTopicNewsUseCase,
@@ -61,21 +62,25 @@ class TopProducer @Inject constructor(
     }
 
     private suspend fun emitLoad(loading: Boolean, action: TopAction) {
-        when (action) {
-            TopAction.Init -> _sideEffect.emit(
-                TopSideEffect.Load(
-                    loadingStatus = LoadingStatus.Init(
-                        loading
-                    )
+        val loadingStatus = when (action) {
+            TopAction.Init -> {
+                LoadingStatus.Init(
+                    loading = loading,
                 )
-            )
-            TopAction.Refresh -> _sideEffect.emit(
-                TopSideEffect.Load(
-                    loadingStatus = LoadingStatus.Refresh(
-                        loading
-                    )
+            }
+            TopAction.Refresh -> {
+                LoadingStatus.Refresh(
+                    loading = loading,
                 )
-            )
+            }
         }
+
+        _sideEffect.emit(
+            TopSideEffect.Common(
+                commonSideEffect = CommonSideEffect.Load(
+                    loadingStatus = loadingStatus,
+                ),
+            )
+        )
     }
 }

@@ -58,6 +58,7 @@ class TopProducerTest : UseCaseTest() {
             googleNews = googleNewsModel,
             topHeadlines = topHeadlinesModel,
             currentWeather = currentWeatherModel,
+            error = false,
         )
         val newState = topProducer.reduce(currentState, action)
 
@@ -66,6 +67,7 @@ class TopProducerTest : UseCaseTest() {
                 googleNews = googleNewsModel,
                 topHeadlines = topHeadlinesModel,
                 currentWeather = currentWeatherModel,
+                error = false,
             ),
             newState,
         )
