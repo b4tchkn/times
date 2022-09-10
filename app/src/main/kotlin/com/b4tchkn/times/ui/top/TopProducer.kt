@@ -5,14 +5,15 @@ import com.b4tchkn.times.data.GoogleNewsServiceTopicType
 import com.b4tchkn.times.domain.GetCurrentWeatherUseCase
 import com.b4tchkn.times.domain.GetGoogleTopicNewsUseCase
 import com.b4tchkn.times.domain.GetNewsTopHeadlinesUseCase
+import com.b4tchkn.times.ui.LoadingStatus
 import com.b4tchkn.times.ui.top.model.TopAction
 import com.b4tchkn.times.ui.top.model.TopSideEffect
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
+import javax.inject.Inject
 
 class TopProducer @Inject constructor(
     private val getGoogleTopicNewsUseCase: GetGoogleTopicNewsUseCase,
@@ -25,13 +26,12 @@ class TopProducer @Inject constructor(
 
     override suspend fun reduce(state: TopState, action: TopAction): TopState {
         return when (action) {
-            is TopAction.Init -> fetch(state)
-            is TopAction.Refresh -> fetch(state)
+            is TopAction.Init -> fetch(state, action)
+            is TopAction.Refresh -> fetch(state, action)
         }
     }
 
-    private suspend fun fetch(state: TopState): TopState {
-        _sideEffect.emit(TopSideEffect.Load(loading = true))
+    private suspend fun fetch(state: TopState, action: TopAction): TopState {
         val googleTopicNews =
             getGoogleTopicNewsUseCase(topicType = GoogleNewsServiceTopicType.BUSINESS)
         val topHeadlines = getNewsTopHeadlinesUseCase()
@@ -45,12 +45,37 @@ class TopProducer @Inject constructor(
             topHeadlines,
             currentWeather
         ) { googleTopicNewsResult, topHeadlinesResult, currentWeatherResult ->
-            _sideEffect.emit(TopSideEffect.Load(loading = false))
-            state.copy(
-                googleNews = googleTopicNewsResult.getOrNull(),
-                topHeadlines = topHeadlinesResult.getOrNull(),
-                currentWeather = currentWeatherResult.getOrNull(),
-            )
+            emitLoad(true, action)
+            val newState = try {
+                state.copy(
+                    googleNews = googleTopicNewsResult.getOrThrow(),
+                    topHeadlines = topHeadlinesResult.getOrThrow(),
+                    currentWeather = currentWeatherResult.getOrThrow(),
+                )
+            } catch (e: Exception) {
+                state.copy(error = true)
+            }
+            emitLoad(false, action)
+            newState
         }.first()
+    }
+
+    private suspend fun emitLoad(loading: Boolean, action: TopAction) {
+        when (action) {
+            TopAction.Init -> _sideEffect.emit(
+                TopSideEffect.Load(
+                    loadingStatus = LoadingStatus.Init(
+                        loading
+                    )
+                )
+            )
+            TopAction.Refresh -> _sideEffect.emit(
+                TopSideEffect.Load(
+                    loadingStatus = LoadingStatus.Refresh(
+                        loading
+                    )
+                )
+            )
+        }
     }
 }

@@ -24,6 +24,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.b4tchkn.times.R
+import com.b4tchkn.times.ui.Connector
+import com.b4tchkn.times.ui.LoadingStatus
 import com.b4tchkn.times.ui.theme.AppColor
 import com.b4tchkn.times.ui.top.model.TopAction
 import com.b4tchkn.times.ui.top.model.TopSideEffect
@@ -34,7 +36,7 @@ fun TopScreenConnector(
 ) {
     val lifecycleOwner = LocalLifecycleOwner.current
     val state by viewModel.uiState.collectAsState()
-    var loading by remember { mutableStateOf(false) }
+    var loadingStatus by remember { mutableStateOf<LoadingStatus?>(null) }
     val context = LocalContext.current
     val scaffoldState = rememberScaffoldState()
     val snackbarHostState = scaffoldState.snackbarHostState
@@ -44,7 +46,7 @@ fun TopScreenConnector(
             viewModel.dispatch(TopAction.Init)
             viewModel.sideEffect.collect {
                 when (it) {
-                    TopSideEffect.Error -> {
+                    is TopSideEffect.Error -> {
                         snackbarHostState.showSnackbar(
                             message = context.getString(
                                 R.string.snackbar_error
@@ -52,7 +54,8 @@ fun TopScreenConnector(
                         )
                     }
                     is TopSideEffect.Load -> {
-                        loading = it.loading
+                        println("@@@@@ effect = $it")
+                        loadingStatus = it.loadingStatus
                     }
                 }
             }
@@ -77,10 +80,14 @@ fun TopScreenConnector(
             }
         },
     ) {
-        TopScreen(
-            paddingValues = it,
-            topState = state,
-            loading = loading,
-        )
+        Connector(
+            loadingStatus = loadingStatus,
+            error = state.error,
+        ) {
+            TopScreen(
+                paddingValues = it,
+                topState = state,
+            )
+        }
     }
 }
