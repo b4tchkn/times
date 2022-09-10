@@ -32,7 +32,7 @@ fun TopScreen(
     ) {
         LazyColumn {
             item {
-                Text(text = currentWeather?.weather?.firstOrNull()?.description.toString())
+                Text(text = currentWeather?.weather?.description.toString())
             }
             item {
                 Gap(padding = 16.dp)
@@ -44,6 +44,7 @@ fun TopScreen(
                     Text(text = article.content ?: "")
                     Text(text = article.description ?: "")
                     Text(text = article.urlToImage ?: "")
+                    Text(text = article.publishedAt.toString())
                 }
             }
             item {
@@ -55,7 +56,7 @@ fun TopScreen(
                     modifier = Modifier.clickable { },
                     title = article.title,
                     source = article.source,
-                    publishDate = article.pubDate,
+                    publishDate = article.publishedAt.toString(),
                 )
                 AppDivider(
                     startIndent = 16.dp,

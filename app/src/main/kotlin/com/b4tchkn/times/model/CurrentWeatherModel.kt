@@ -1,31 +1,24 @@
 package com.b4tchkn.times.model
 
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonNames
+import androidx.annotation.VisibleForTesting
+import com.b4tchkn.times.model.response.CurrentWeatherResponse
 
-@OptIn(ExperimentalSerializationApi::class)
-@Serializable
 data class CurrentWeatherModel(
-    @JsonNames("coord")
     val coord: CoordModel,
-
-    @JsonNames("weather")
-    val weather: List<WeatherModel>,
-
-    @JsonNames("main")
+    val weather: WeatherModel?,
     val main: MainModel,
 ) {
-
-    @Serializable
     data class CoordModel(
-        @JsonNames("lon")
         val longitude: Double,
-
-        @JsonNames("lat")
         val latitude: Double,
     ) {
         companion object {
+            fun fromV1(response: CurrentWeatherResponse.CoordResponse) = CoordModel(
+                longitude = response.longitude,
+                latitude = response.longitude,
+            )
+
+            @VisibleForTesting
             val defaultInstance = CoordModel(
                 longitude = 0.0,
                 latitude = 0.0,
@@ -33,21 +26,22 @@ data class CurrentWeatherModel(
         }
     }
 
-    @Serializable
     data class WeatherModel(
-        @JsonNames("id")
         val id: Int,
-
-        @JsonNames("main")
         val main: String,
-
-        @JsonNames("description")
         val description: String,
-
-        @JsonNames("icon")
         val icon: String,
     ) {
         companion object {
+            fun fromV1(response: CurrentWeatherResponse.WeatherResponse?) =
+                if (response == null) null else WeatherModel(
+                    id = response.id,
+                    main = response.main,
+                    description = response.description,
+                    icon = response.icon,
+                )
+
+            @VisibleForTesting
             val defaultInstance = WeatherModel(
                 id = 0,
                 main = "",
@@ -57,28 +51,25 @@ data class CurrentWeatherModel(
         }
     }
 
-    @Serializable
     data class MainModel(
-        @JsonNames("temp")
         val temp: Double,
-
-        @JsonNames("feels_like")
         val feelsLike: Double,
-
-        @JsonNames("temp_min")
         val tempMin: Double,
-
-        @JsonNames("temp_max")
         val tempMax: Double,
-
-        @JsonNames("pressure")
         val pressure: Int,
-
-        @JsonNames("humidity")
         val humidity: Int,
     ) {
-
         companion object {
+            fun fromV1(response: CurrentWeatherResponse.MainResponse) = MainModel(
+                temp = response.temp,
+                feelsLike = response.feelsLike,
+                tempMin = response.tempMin,
+                tempMax = response.tempMax,
+                pressure = response.pressure,
+                humidity = response.humidity,
+            )
+
+            @VisibleForTesting
             val defaultInstance = MainModel(
                 temp = 0.0,
                 feelsLike = 0.0,
@@ -91,9 +82,16 @@ data class CurrentWeatherModel(
     }
 
     companion object {
+        fun fromV1(response: CurrentWeatherResponse) = CurrentWeatherModel(
+            coord = CoordModel.fromV1(response.coord),
+            weather = WeatherModel.fromV1(response.weather.firstOrNull()),
+            main = MainModel.fromV1(response.main),
+        )
+
+        @VisibleForTesting
         val defaultInstance = CurrentWeatherModel(
             coord = CoordModel.defaultInstance,
-            weather = listOf(),
+            weather = null,
             main = MainModel.defaultInstance,
         )
     }

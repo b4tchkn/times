@@ -2,6 +2,7 @@ package com.b4tchkn.times.domain
 
 import com.b4tchkn.times.data.OpenWeatherService
 import com.b4tchkn.times.di.IODispatcher
+import com.b4tchkn.times.model.CurrentWeatherModel
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
@@ -20,7 +21,8 @@ class GetCurrentWeatherUseCase @Inject constructor(
             lat = latitude,
             lon = longitude,
         )
-        emit(Result.success(response))
+        val model = CurrentWeatherModel.fromV1(response)
+        emit(Result.success(model))
     }
         .catch { emit(Result.failure(it)) }
         .flowOn(ioDispatcher)
