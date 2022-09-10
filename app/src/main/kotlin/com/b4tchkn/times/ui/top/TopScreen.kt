@@ -12,13 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.b4tchkn.times.ui.component.AppDivider
 import com.b4tchkn.times.ui.component.Gap
-import com.b4tchkn.times.ui.component.LoadIndicator
 
 @Composable
 fun TopScreen(
     paddingValues: PaddingValues,
     topState: TopState,
-    loading: Boolean,
 ) {
     val googleNewsArticles = topState.googleNews?.articles
     val topHeadlines = topState.topHeadlines?.articles
@@ -64,6 +62,5 @@ fun TopScreen(
                 )
             }
         }
-        if (loading) LoadIndicator()
     }
 }

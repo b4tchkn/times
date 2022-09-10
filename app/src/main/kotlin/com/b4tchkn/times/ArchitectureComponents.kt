@@ -13,7 +13,9 @@ abstract class StoreViewModel<in ACTION : Action, out STATE : State, SIDE_EFFECT
 
 interface SideEffect
 
-interface State
+abstract class State {
+    abstract val error: Boolean
+}
 
 interface Action
 
