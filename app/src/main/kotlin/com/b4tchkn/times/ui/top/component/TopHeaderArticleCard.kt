@@ -45,17 +45,16 @@ fun TopHeader(
         0f to AppColor.White.copy(alpha = 0.0f),
         1000f to AppColor.Black.copy(alpha = 0.8f)
     )
-    val sampleImageUrl = "https://whitewood-hp.com/web-tips/wp-content/uploads/2019/01/penguin.jpg"
     Box(
         modifier = Modifier
             .height(320.dp)
-            .clip(RoundedCornerShape(bottomEnd = 32.dp, bottomStart = 32.dp))
+            .clip(RoundedCornerShape(bottomEnd = 24.dp, bottomStart = 24.dp))
             .clickable { onClicked() }
     ) {
         AsyncImage(
             modifier = Modifier
                 .fillMaxSize(),
-            model = sampleImageUrl,
+            model = article.urlToImage,
             contentDescription = article.title,
             contentScale = ContentScale.FillHeight,
         )
