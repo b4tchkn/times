@@ -21,13 +21,13 @@ fun formatBeforeDateTimeFromNowString(context: Context, dateTime: LocalDateTime)
     }
 }
 
-fun formatDayOfWeekJp(value: Int) = when (value) {
-    1 -> "月"
-    2 -> "火"
-    3 -> "水"
-    4 -> "木"
-    5 -> "金"
-    6 -> "土"
-    7 -> "日"
+fun formatDayOfWeekJp(context: Context, value: Int) = when (value) {
+    1 -> context.getString(R.string.monday)
+    2 -> context.getString(R.string.tuesday)
+    3 -> context.getString(R.string.wednesday)
+    4 -> context.getString(R.string.thursday)
+    5 -> context.getString(R.string.friday)
+    6 -> context.getString(R.string.saturday)
+    7 -> context.getString(R.string.sunday)
     else -> ""
 }

@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -64,12 +65,13 @@ fun TopHeaderOverRow(
                     )
                 }
                 val now = LocalDateTime.now()
+                val context = LocalContext.current
                 Text(
                     text = stringResource(
-                        R.string.MMdd_dayOfWeek,
+                        R.string.month_day_dayOfWeek,
                         now.month.value,
                         now.dayOfMonth,
-                        formatDayOfWeekJp(now.dayOfWeek.value),
+                        formatDayOfWeekJp(context, now.dayOfWeek.value),
                     ),
                     fontSize = 16.sp,
                 )
