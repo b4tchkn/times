@@ -3,8 +3,20 @@
     <string name="snackbar_error">不明なエラーが発生しました</string>
     <string name="top_header_article_card_read_article">記事を読む</string>
 
+
+    <string name="month_day_dayOfWeek">%1$d月%2$d日（%3$s）</string>
     <string name="before_min">%1$d分前</string>
     <string name="before_hour_min">%1$d時間%2$d分前</string>
+
+    <string name="monday">月</string>
+    <string name="tuesday">火</string>
+    <string name="wednesday">水</string>
+    <string name="thursday">木</string>
+    <string name="friday">金</string>
+    <string name="saturday">土</string>
+    <string name="sunday">日</string>
+
+    <string name="unit_temp">℃</string>
 
     <!--  For Semantics  -->
     <string name="semantics_search">検索</string>
