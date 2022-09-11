@@ -40,8 +40,12 @@ fun TopScreen(
                     }
                     TopHeaderOverRow(
                         currentWeather = currentWeather,
-                        onWeatherClicked = {},
-                        onSearchClicked = {},
+                        onWeatherClicked = {
+                            // TODO: handle callback
+                        },
+                        onSearchClicked = {
+                            // TODO: handle callback
+                        },
                     )
                 }
             }
@@ -51,7 +55,9 @@ fun TopScreen(
             items(googleNewsArticles?.size ?: 0) { index ->
                 val article = googleNewsArticles?.get(index) ?: return@items
                 TopArticleItem(
-                    modifier = Modifier.clickable { },
+                    modifier = Modifier.clickable {
+                        // TODO: handle callback
+                    },
                     title = article.title,
                     source = article.source,
                     publishDate = article.publishedAt.toString(),
