@@ -14,6 +14,7 @@ import com.b4tchkn.times.ui.component.Gap
 import com.b4tchkn.times.ui.top.component.TopArticleHeader
 import com.b4tchkn.times.ui.top.component.TopArticleItem
 import com.b4tchkn.times.ui.top.component.TopHeaderOverRow
+import com.b4tchkn.times.ui.top.component.headlines_carousel.TopHeadlinesCarousel
 
 @Composable
 fun TopScreen(
@@ -51,6 +52,14 @@ fun TopScreen(
             }
             item {
                 Gap(32.dp)
+            }
+            if (topHeadlines != null) {
+                item {
+                    TopHeadlinesCarousel(headlines = topHeadlines)
+                }
+                item {
+                    Gap(padding = 16.dp)
+                }
             }
             items(googleNewsArticles?.size ?: 0) { index ->
                 val article = googleNewsArticles?.get(index) ?: return@items
