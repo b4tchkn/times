@@ -2,6 +2,7 @@
     <string name="app_name">TIMES</string>
     <string name="snackbar_error">不明なエラーが発生しました</string>
     <string name="top_header_article_card_read_article">記事を読む</string>
+    <string name="top_headlines_title">ヘッドライン</string>
 
 
     <string name="month_day_dayOfWeek">%1$d月%2$d日（%3$s）</string>
