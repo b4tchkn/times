@@ -18,6 +18,7 @@ import com.b4tchkn.times.ui.component.Gap
 @Composable
 fun TopHeadlinesCarousel(
     headlines: List<NewsArticleModel>,
+    onArticleCardClicked: (article: NewsArticleModel) -> Unit,
 ) {
     val maxHeadlinesCount = 6
 
@@ -39,9 +40,8 @@ fun TopHeadlinesCarousel(
                             end = if (it != maxHeadlinesCount - 1) 16.dp else 0.dp
                         ),
                         article = headlines[it],
-                    ) {
-                        // TODO: handle callback
-                    }
+                        onCardClicked = { onArticleCardClicked(headlines[it]) },
+                    )
                 }
             }
         }

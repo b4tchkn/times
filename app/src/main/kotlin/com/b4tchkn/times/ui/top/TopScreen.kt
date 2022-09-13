@@ -55,7 +55,12 @@ fun TopScreen(
             }
             if (topHeadlines != null) {
                 item {
-                    TopHeadlinesCarousel(headlines = topHeadlines)
+                    TopHeadlinesCarousel(
+                        headlines = topHeadlines,
+                        onArticleCardClicked = {
+                            // TODO: handle callback
+                        }
+                    )
                 }
                 item {
                     Gap(padding = 16.dp)
