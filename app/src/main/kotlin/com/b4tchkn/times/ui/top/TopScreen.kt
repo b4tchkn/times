@@ -1,6 +1,5 @@
 package com.b4tchkn.times.ui.top
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -14,6 +13,7 @@ import com.b4tchkn.times.ui.component.Gap
 import com.b4tchkn.times.ui.top.component.TopArticleHeader
 import com.b4tchkn.times.ui.top.component.TopArticleItem
 import com.b4tchkn.times.ui.top.component.TopHeaderOverRow
+import com.b4tchkn.times.ui.top.component.category_topic.TopCategoryTopicNews
 import com.b4tchkn.times.ui.top.component.headlines_carousel.TopHeadlinesCarousel
 
 @Composable
@@ -21,7 +21,7 @@ fun TopScreen(
     paddingValues: PaddingValues,
     topState: TopState,
 ) {
-    val googleNewsArticles = topState.googleNews?.articles
+    val googleCategoryTopics = topState.googleTopicNews
     val topHeadlines = topState.topHeadlines?.articles
     val currentWeather = topState.currentWeather
     Box(
@@ -66,21 +66,41 @@ fun TopScreen(
                     Gap(padding = 16.dp)
                 }
             }
-            items(googleNewsArticles?.size ?: 0) { index ->
-                val article = googleNewsArticles?.get(index) ?: return@items
-                TopArticleItem(
-                    modifier = Modifier.clickable {
-                        // TODO: handle callback
-                    },
-                    title = article.title,
-                    source = article.source,
-                    publishDate = article.publishedAt.toString(),
-                )
-                AppDivider(
-                    startIndent = 16.dp,
-                    endIndent = 16.dp,
-                    thickness = 2.dp,
-                )
+            if (googleCategoryTopics.isNotEmpty()) {
+                item {
+                    TopCategoryTopicNews(
+                        googleCategoryTopicNews = googleCategoryTopics,
+                        onArticleClicked = {},
+                    )
+                }
+                item {
+                    Gap(padding = 16.dp)
+                }
+                item {
+                    AppDivider()
+                }
+            }
+            if (
+                googleCategoryTopics.isNotEmpty() &&
+                googleCategoryTopics[0].articles.isNotEmpty()
+            ) {
+                val articles = googleCategoryTopics[0].articles
+                items(articles.size) { index ->
+                    val article = articles[index]
+                    TopArticleItem(
+                        title = article.title,
+                        source = article.source,
+                        publishDate = article.publishedAt.toString(),
+                        onArticleClicked = {
+                            // TODO: handle callback
+                        },
+                    )
+                    AppDivider(
+                        startIndent = 16.dp,
+                        endIndent = 16.dp,
+                        thickness = 2.dp,
+                    )
+                }
             }
         }
     }

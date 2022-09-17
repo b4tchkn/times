@@ -9,12 +9,12 @@ import com.b4tchkn.times.model.StoreViewModel
 import com.b4tchkn.times.ui.top.model.TopAction
 import com.b4tchkn.times.ui.top.model.TopSideEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class TopStoreViewModel @Inject constructor(
@@ -36,14 +36,14 @@ class TopStoreViewModel @Inject constructor(
 }
 
 data class TopState(
-    val googleNews: GoogleNewsRssModel?,
+    val googleTopicNews: List<GoogleNewsRssModel>,
     val topHeadlines: NewsModel?,
     val currentWeather: CurrentWeatherModel?,
     override val error: Boolean,
 ) : State() {
     companion object {
         val init = TopState(
-            googleNews = null,
+            googleTopicNews = listOf(),
             topHeadlines = null,
             currentWeather = null,
             error = false,
