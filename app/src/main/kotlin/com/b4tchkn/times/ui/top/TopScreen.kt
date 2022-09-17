@@ -8,10 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.b4tchkn.times.ui.component.AppDivider
 import com.b4tchkn.times.ui.component.Gap
 import com.b4tchkn.times.ui.top.component.TopArticleHeader
-import com.b4tchkn.times.ui.top.component.TopArticleItem
 import com.b4tchkn.times.ui.top.component.TopHeaderOverRow
 import com.b4tchkn.times.ui.top.component.category_topic.TopCategoryTopicNews
 import com.b4tchkn.times.ui.top.component.headlines_carousel.TopHeadlinesCarousel
@@ -75,31 +73,6 @@ fun TopScreen(
                 }
                 item {
                     Gap(padding = 16.dp)
-                }
-                item {
-                    AppDivider()
-                }
-            }
-            if (
-                googleCategoryTopics.isNotEmpty() &&
-                googleCategoryTopics[0].articles.isNotEmpty()
-            ) {
-                val articles = googleCategoryTopics[0].articles
-                items(articles.size) { index ->
-                    val article = articles[index]
-                    TopArticleItem(
-                        title = article.title,
-                        source = article.source,
-                        publishDate = article.publishedAt.toString(),
-                        onArticleClicked = {
-                            // TODO: handle callback
-                        },
-                    )
-                    AppDivider(
-                        startIndent = 16.dp,
-                        endIndent = 16.dp,
-                        thickness = 2.dp,
-                    )
                 }
             }
         }

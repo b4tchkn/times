@@ -1,17 +1,17 @@
 package com.b4tchkn.times.ui.top
 
-import com.b4tchkn.times.data.GoogleNewsServiceTopicType
 import com.b4tchkn.times.domain.GetCurrentWeatherUseCase
 import com.b4tchkn.times.domain.GetGoogleTopicNewsUseCase
 import com.b4tchkn.times.domain.GetNewsTopHeadlinesUseCase
 import com.b4tchkn.times.model.GoogleNewsRssModel
+import com.b4tchkn.times.model.GoogleNewsServiceTopicTypeModel
 import com.b4tchkn.times.model.Producer
 import com.b4tchkn.times.ui.CommonSideEffect
 import com.b4tchkn.times.ui.LoadingStatus
 import com.b4tchkn.times.ui.top.model.TopAction
 import com.b4tchkn.times.ui.top.model.TopSideEffect
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -36,7 +36,7 @@ class TopProducer @Inject constructor(
 
     private suspend fun fetch(state: TopState, action: TopAction): TopState {
         val googleTopicNewsUseCases = mutableListOf<Flow<Result<GoogleNewsRssModel>>>()
-        GoogleNewsServiceTopicType.values().forEach {
+        GoogleNewsServiceTopicTypeModel.values().forEach {
             googleTopicNewsUseCases.add(getGoogleTopicNewsUseCase(it))
         }
         val topHeadlines = getNewsTopHeadlinesUseCase()

@@ -55,7 +55,7 @@ class TopProducerTest : UseCaseTest() {
             getCurrentWeatherUseCase(any(), any())
         ).thenReturn(flowOf(Result.success(currentWeatherModel)))
         val currentState = TopState(
-            googleNews = googleNewsModel,
+            googleTopicNews = listOf(),
             topHeadlines = topHeadlinesModel,
             currentWeather = currentWeatherModel,
             error = false,
@@ -64,7 +64,7 @@ class TopProducerTest : UseCaseTest() {
 
         Assert.assertEquals(
             TopState(
-                googleNews = googleNewsModel,
+                googleTopicNews = List(8) { googleNewsModel },
                 topHeadlines = topHeadlinesModel,
                 currentWeather = currentWeatherModel,
                 error = false,

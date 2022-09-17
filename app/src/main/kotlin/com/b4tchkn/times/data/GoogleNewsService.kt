@@ -8,14 +8,3 @@ interface GoogleNewsService {
     @GET("{topic}?hl=ja&gl=JP&ceid=JP:ja")
     suspend fun getTopicNews(@Path("topic") topic: String): GoogleNewsRssResponse
 }
-
-enum class GoogleNewsServiceTopicType {
-    WORLD,
-    NATION,
-    BUSINESS,
-    TECHNOLOGY,
-    ENTERTAINMENT,
-    SPORTS,
-    SCIENCE,
-    HEALTH,
-}
