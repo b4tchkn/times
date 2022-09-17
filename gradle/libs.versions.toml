@@ -11,6 +11,7 @@ hilt = "2.43.2"
 androidxCore = "1.9.0"
 compose = "1.2.1"
 coilCompose = "2.2.1"
+accompanistPager = "0.25.1"
 androidxLifecycle = "2.5.1"
 androidxActivity = "1.5.1"
 junit = "4.13.2"
@@ -34,6 +35,7 @@ androidDesugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs"
 androidxCore = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
 composeUi = { group = "androidx.compose.ui", name = "ui", version.ref = "compose" }
 coilCompose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
+accompanistPager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanistPager" }
 composeMaterial = { group = "androidx.compose.material", name = "material", version.ref = "compose" }
 composeUiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
 androidxLifecycleRuntimeKtx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }

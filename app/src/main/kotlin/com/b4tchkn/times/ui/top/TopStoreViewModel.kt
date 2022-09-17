@@ -36,14 +36,14 @@ class TopStoreViewModel @Inject constructor(
 }
 
 data class TopState(
-    val googleNews: GoogleNewsRssModel?,
+    val googleTopicNews: List<GoogleNewsRssModel>,
     val topHeadlines: NewsModel?,
     val currentWeather: CurrentWeatherModel?,
     override val error: Boolean,
 ) : State() {
     companion object {
         val init = TopState(
-            googleNews = null,
+            googleTopicNews = listOf(),
             topHeadlines = null,
             currentWeather = null,
             error = false,

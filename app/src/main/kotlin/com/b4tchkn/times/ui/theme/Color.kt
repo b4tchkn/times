@@ -17,4 +17,7 @@ object AppColor {
 
     @Stable
     val White = Color(0xFFFFFFFF)
+
+    @Stable
+    val Transparent = Color(0x00FFFFFF)
 }
