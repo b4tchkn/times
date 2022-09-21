@@ -25,6 +25,11 @@ fun TopScreenConnector(
             TopScreen(
                 paddingValues = it,
                 topState = state,
+                effect = viewModel.sideEffect,
+                onRefreshed = {
+                    println("🐝🐝🐝 TopScreenConnector - onRefreshed")
+                    viewModel.dispatch(TopAction.Refresh)
+                }
             )
         }
     }
