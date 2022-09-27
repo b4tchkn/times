@@ -6,7 +6,6 @@ import com.b4tchkn.times.domain.GetNewsTopHeadlinesUseCase
 import com.b4tchkn.times.model.GoogleNewsRssModel
 import com.b4tchkn.times.model.GoogleNewsServiceTopicTypeModel
 import com.b4tchkn.times.model.Producer
-import com.b4tchkn.times.ui.CommonSideEffect
 import com.b4tchkn.times.ui.LoadingStatus
 import com.b4tchkn.times.ui.top.model.TopAction
 import com.b4tchkn.times.ui.top.model.TopSideEffect
@@ -23,7 +22,7 @@ class TopProducer @Inject constructor(
     private val getNewsTopHeadlinesUseCase: GetNewsTopHeadlinesUseCase,
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
 ) : Producer<TopState, TopAction, TopSideEffect>() {
-    private val _sideEffect = MutableSharedFlow<TopSideEffect>(replay = 1)
+    private val _sideEffect = MutableSharedFlow<TopSideEffect>()
     override val sideEffect: SharedFlow<TopSideEffect>
         get() = _sideEffect.asSharedFlow()
 
@@ -31,6 +30,8 @@ class TopProducer @Inject constructor(
         return when (action) {
             is TopAction.Init -> fetch(state, action)
             is TopAction.Refresh -> fetch(state, action)
+            is TopAction.InitLoad -> state.copy(loadingStatus = LoadingStatus.Init(true))
+            is TopAction.RefreshLoad -> state.copy(loadingStatus = LoadingStatus.Refresh(true))
         }
     }
 
@@ -51,41 +52,17 @@ class TopProducer @Inject constructor(
             topHeadlines,
             currentWeather
         ) { googleTopicNewsResults, topHeadlinesResult, currentWeatherResult ->
-            emitLoad(true, action)
             val newState = try {
                 state.copy(
                     googleTopicNews = googleTopicNewsResults.map { it.getOrThrow() },
                     topHeadlines = topHeadlinesResult.getOrThrow(),
                     currentWeather = currentWeatherResult.getOrThrow(),
+                    loadingStatus = LoadingStatus.Init(loading = false)
                 )
             } catch (e: Exception) {
                 state.copy(error = true)
             }
-            emitLoad(false, action)
             newState
         }.first()
-    }
-
-    private suspend fun emitLoad(loading: Boolean, action: TopAction) {
-        val loadingStatus = when (action) {
-            TopAction.Init -> {
-                LoadingStatus.Init(
-                    loading = loading,
-                )
-            }
-            TopAction.Refresh -> {
-                LoadingStatus.Refresh(
-                    loading = loading,
-                )
-            }
-        }
-
-        _sideEffect.emit(
-            TopSideEffect.Common(
-                commonSideEffect = CommonSideEffect.Load(
-                    loadingStatus = loadingStatus,
-                ),
-            )
-        )
     }
 }

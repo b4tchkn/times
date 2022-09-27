@@ -7,9 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -35,7 +32,6 @@ fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val state by storeViewModel.uiState.collectAsState()
-    var loadingStatus by remember { mutableStateOf<LoadingStatus?>(null) }
 
     LaunchedEffect(Unit) {
         lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
@@ -43,14 +39,12 @@ fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
 
             storeViewModel.sideEffect.collect {
                 if (it is TopSideEffect.Common) {
-                    when (val commonSideEffect = it.commonSideEffect) {
+                    when (it.commonSideEffect) {
                         CommonSideEffect.Error -> snackbarHostState?.showSnackbar(
                             message = context.getString(
                                 R.string.snackbar_error
                             )
                         )
-                        is CommonSideEffect.Load ->
-                            loadingStatus = commonSideEffect.loadingStatus
                     }
                 }
             }
@@ -60,7 +54,7 @@ fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
     UIHandler(
         modifier = modifier,
         error = state.error,
-        loadingStatus = loadingStatus,
+        loadingStatus = state.loadingStatus,
     ) {
         screen(state)
     }
@@ -70,11 +64,10 @@ fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
 private fun UIHandler(
     modifier: Modifier,
     error: Boolean,
-    loadingStatus: LoadingStatus?,
+    loadingStatus: LoadingStatus,
     screen: @Composable () -> Unit
 ) {
-    val isInit = loadingStatus == null ||
-        (loadingStatus is LoadingStatus.Init && loadingStatus.loading)
+    val isInit = loadingStatus is LoadingStatus.Init && loadingStatus.loading
     if (isInit) {
         LoadIndicator()
         return
