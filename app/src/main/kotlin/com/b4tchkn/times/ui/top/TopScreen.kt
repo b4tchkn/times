@@ -33,7 +33,6 @@ fun TopScreen(
             isRefreshing = loadingStatus is LoadingStatus.Refresh && loadingStatus.loading
         ),
         onRefresh = {
-            // loading = true
             onRefreshed()
         }
     ) {

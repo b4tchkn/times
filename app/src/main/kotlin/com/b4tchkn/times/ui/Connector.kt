@@ -64,11 +64,11 @@ fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
 private fun UIHandler(
     modifier: Modifier,
     error: Boolean,
-    loadingStatus: LoadingStatus,
+    loadingStatus: LoadingStatus?,
     screen: @Composable () -> Unit
 ) {
-    val isInit = loadingStatus is LoadingStatus.Init && loadingStatus.loading
-    if (isInit) {
+    val isInitLoading = loadingStatus is LoadingStatus.Init && loadingStatus.loading
+    if (isInitLoading) {
         LoadIndicator()
         return
     }
@@ -76,11 +76,15 @@ private fun UIHandler(
     if (error) {
         ErrorScreen(modifier = modifier)
     } else {
-        val isRefresh = loadingStatus is LoadingStatus.Refresh &&
+        val isRefreshLoading = if (loadingStatus is LoadingStatus.Refresh) {
             loadingStatus.loading
+        } else {
+            false
+        }
+
         Box(modifier = modifier) {
             screen()
-            if (isRefresh) {
+            if (isRefreshLoading) {
                 LoadIndicator()
             }
         }

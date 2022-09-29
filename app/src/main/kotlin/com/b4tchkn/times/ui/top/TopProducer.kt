@@ -57,12 +57,22 @@ class TopProducer @Inject constructor(
                     googleTopicNews = googleTopicNewsResults.map { it.getOrThrow() },
                     topHeadlines = topHeadlinesResult.getOrThrow(),
                     currentWeather = currentWeatherResult.getOrThrow(),
-                    loadingStatus = LoadingStatus.Init(loading = false)
+                    loadingStatus = loadedStatusFromAction(action),
                 )
             } catch (e: Exception) {
-                state.copy(error = true)
+                state.copy(
+                    error = true,
+                    loadingStatus = loadedStatusFromAction(action),
+                )
             }
             newState
         }.first()
+    }
+
+    private fun loadedStatusFromAction(action: TopAction) = when (action) {
+        TopAction.Init -> LoadingStatus.Init(loading = false)
+        TopAction.InitLoad -> LoadingStatus.Init(loading = false)
+        TopAction.Refresh -> LoadingStatus.Refresh(loading = false)
+        TopAction.RefreshLoad -> LoadingStatus.Refresh(false)
     }
 }
