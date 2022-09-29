@@ -25,6 +25,7 @@ dependencies {
     implementation(libs.composeUi)
     implementation(libs.coilCompose)
     implementation(libs.accompanistPager)
+    implementation(libs.accompanistSwiperefresh)
     implementation(libs.composeMaterial)
     implementation(libs.composeUiToolingPreview)
     implementation(libs.androidxLifecycleRuntimeKtx)

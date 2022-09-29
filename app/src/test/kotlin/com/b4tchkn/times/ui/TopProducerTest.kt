@@ -59,6 +59,7 @@ class TopProducerTest : UseCaseTest() {
             topHeadlines = topHeadlinesModel,
             currentWeather = currentWeatherModel,
             error = false,
+            loadingStatus = LoadingStatus.Init(loading = false)
         )
         val newState = topProducer.reduce(currentState, action)
 
@@ -68,6 +69,7 @@ class TopProducerTest : UseCaseTest() {
                 topHeadlines = topHeadlinesModel,
                 currentWeather = currentWeatherModel,
                 error = false,
+                loadingStatus = LoadingStatus.Init(loading = false)
             ),
             newState,
         )

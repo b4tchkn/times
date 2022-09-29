@@ -1,6 +1,7 @@
 package com.b4tchkn.times.model
 
 import androidx.lifecycle.ViewModel
+import com.b4tchkn.times.ui.LoadingStatus
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -15,6 +16,7 @@ interface SideEffect
 
 abstract class State {
     abstract val error: Boolean
+    abstract val loadingStatus: LoadingStatus
 }
 
 interface Action

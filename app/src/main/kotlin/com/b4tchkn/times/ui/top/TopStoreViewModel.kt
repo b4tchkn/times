@@ -6,6 +6,7 @@ import com.b4tchkn.times.model.GoogleNewsRssModel
 import com.b4tchkn.times.model.NewsModel
 import com.b4tchkn.times.model.State
 import com.b4tchkn.times.model.StoreViewModel
+import com.b4tchkn.times.ui.LoadingStatus
 import com.b4tchkn.times.ui.top.model.TopAction
 import com.b4tchkn.times.ui.top.model.TopSideEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,6 +41,7 @@ data class TopState(
     val topHeadlines: NewsModel?,
     val currentWeather: CurrentWeatherModel?,
     override val error: Boolean,
+    override val loadingStatus: LoadingStatus,
 ) : State() {
     companion object {
         val init = TopState(
@@ -47,6 +49,7 @@ data class TopState(
             topHeadlines = null,
             currentWeather = null,
             error = false,
+            loadingStatus = LoadingStatus.Init(loading = false)
         )
     }
 }
