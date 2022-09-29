@@ -3,6 +3,7 @@ package com.b4tchkn.times.ui.top.component.headlines_carousel
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -29,7 +30,7 @@ fun TopHeadlinesCarouselArticleCard(
     Box(modifier = modifier) {
         Column(
             modifier = Modifier
-                .width(280.dp)
+                .width(240.dp)
                 .clip(RoundedCornerShape(16.dp))
                 .clickable {
                     onCardClicked()
@@ -38,7 +39,8 @@ fun TopHeadlinesCarouselArticleCard(
         ) {
             AsyncImage(
                 modifier = Modifier
-                    .height(160.dp)
+                    .fillMaxWidth()
+                    .height(120.dp)
                     .clip(RoundedCornerShape(16.dp)),
                 model = article.urlToImage,
                 contentDescription = article.title,
