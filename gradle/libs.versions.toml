@@ -1,6 +1,6 @@
 [versions]
 androidGradlePlugin = "7.3.0"
-kotlin = "1.7.0"
+kotlin = "1.7.10"
 kotlinCoroutine = "1.6.4"
 secretsGradlePlugin = "2.0.1"
 spotless = "6.11.0"
