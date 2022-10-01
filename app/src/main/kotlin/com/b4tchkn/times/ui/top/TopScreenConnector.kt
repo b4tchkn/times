@@ -4,13 +4,17 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.b4tchkn.times.ui.Connector
 import com.b4tchkn.times.ui.top.model.TopAction
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
 
+@RootNavGraph(start = true)
+@Destination
 @Composable
 fun TopScreenConnector(
-    viewModel: TopStoreViewModel = viewModel()
+    viewModel: TopStoreViewModel = hiltViewModel(),
 ) {
     val scaffoldState = rememberScaffoldState()
     val snackbarHostState = scaffoldState.snackbarHostState

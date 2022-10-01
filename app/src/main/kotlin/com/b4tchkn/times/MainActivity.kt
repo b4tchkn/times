@@ -8,7 +8,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.b4tchkn.times.ui.theme.TimesTheme
-import com.b4tchkn.times.ui.top.TopScreenConnector
+import com.b4tchkn.times.ui.top.NavGraphs
+import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,12 +18,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             TimesTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    TopScreenConnector()
+                    DestinationsNavHost(
+                        navGraph = NavGraphs.root,
+                        startRoute = NavGraphs.root.startRoute,
+                    )
                 }
             }
         }

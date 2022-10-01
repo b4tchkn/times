@@ -1,10 +1,7 @@
 plugins {
     id("com.b4tchkn.primitive.androidapplication")
     id("com.b4tchkn.primitive.spotless")
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-    id("kotlinx-serialization")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp") version "1.7.10-1.0.6"
 }
 
 android {
@@ -13,6 +10,13 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.3.1"
+    }
+    applicationVariants.all {
+        kotlin.sourceSets {
+            getByName(name) {
+                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+            }
+        }
     }
 }
 
@@ -31,6 +35,9 @@ dependencies {
     implementation(libs.androidxLifecycleRuntimeKtx)
     implementation(libs.androidxLifecycleViewmodelCompose)
     implementation(libs.androidxActivity)
+    implementation(libs.composeDestinationsCore)
+    ksp(libs.composeDestinationsKsp)
+    implementation(libs.hiltNavigationComopse)
 
     implementation(libs.retrofit)
     implementation(libs.retrofitConverterSimplexml)
