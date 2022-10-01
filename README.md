@@ -1,5 +1,5 @@
 # TIMES
-The Latest Beaking News App.
+The Latest Beaking News App
 
 ## Getting Started
 ### Install npm
