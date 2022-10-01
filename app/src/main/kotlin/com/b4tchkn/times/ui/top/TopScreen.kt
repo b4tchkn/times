@@ -17,7 +17,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.b4tchkn.times.R
-import com.b4tchkn.times.ui.LoadingStatus
 import com.b4tchkn.times.ui.component.Gap
 import com.b4tchkn.times.ui.theme.AppColor
 import com.b4tchkn.times.ui.top.component.TopArticleHeader
@@ -36,11 +35,11 @@ fun TopScreen(
     val googleCategoryTopics = topState.googleTopicNews
     val topHeadlines = topState.topHeadlines?.articles
     val currentWeather = topState.currentWeather
-    val loadingStatus = topState.loadingStatus
 
     SwipeRefresh(
         state = rememberSwipeRefreshState(
-            isRefreshing = loadingStatus is LoadingStatus.Refresh && loadingStatus.loading
+            // Connector側でLoadingIndicator出すため
+            isRefreshing = false
         ),
         onRefresh = onRefreshed,
     ) {

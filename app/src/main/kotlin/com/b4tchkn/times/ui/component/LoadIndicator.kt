@@ -17,8 +17,7 @@ import androidx.compose.ui.unit.dp
 fun LoadIndicator() {
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Gray.copy(alpha = 0.3f)),
+            .fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
         Box(
