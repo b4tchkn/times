@@ -13,6 +13,9 @@ object AppColor {
     val Grey = Color(0xFF333333)
 
     @Stable
+    val DarkGrey = Color(0xFF2A2823)
+
+    @Stable
     val Black = Color(0xFF000000)
 
     @Stable
