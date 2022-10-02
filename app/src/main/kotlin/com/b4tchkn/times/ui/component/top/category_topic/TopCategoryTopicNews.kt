@@ -1,4 +1,4 @@
-package com.b4tchkn.times.ui.top.component.category_topic
+package com.b4tchkn.times.ui.component.top.category_topic
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable

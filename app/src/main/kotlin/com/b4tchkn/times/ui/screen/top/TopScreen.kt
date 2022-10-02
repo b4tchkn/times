@@ -1,4 +1,4 @@
-package com.b4tchkn.times.ui.top
+package com.b4tchkn.times.ui.screen.top
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,17 +19,17 @@ import androidx.compose.ui.unit.dp
 import com.b4tchkn.times.R
 import com.b4tchkn.times.ui.component.Gap
 import com.b4tchkn.times.ui.theme.AppColor
-import com.b4tchkn.times.ui.top.component.TopArticleHeader
-import com.b4tchkn.times.ui.top.component.TopWeatherContent
-import com.b4tchkn.times.ui.top.component.category_topic.TopCategoryTopicNews
-import com.b4tchkn.times.ui.top.component.headlines_carousel.TopHeadlinesCarousel
+import com.b4tchkn.times.ui.component.top.TopArticleHeader
+import com.b4tchkn.times.ui.component.top.TopWeatherContent
+import com.b4tchkn.times.ui.component.top.category_topic.TopCategoryTopicNews
+import com.b4tchkn.times.ui.component.top.headlines_carousel.TopHeadlinesCarousel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @Composable
 fun TopScreen(
     paddingValues: PaddingValues,
-    topState: TopState,
+    topState: TopUiState,
     onRefreshed: () -> Unit,
 ) {
     val googleCategoryTopics = topState.googleTopicNews

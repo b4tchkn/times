@@ -7,8 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import com.b4tchkn.times.ui.screen.top.NavGraphs
 import com.b4tchkn.times.ui.theme.TimesTheme
-import com.b4tchkn.times.ui.top.NavGraphs
 import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint
 

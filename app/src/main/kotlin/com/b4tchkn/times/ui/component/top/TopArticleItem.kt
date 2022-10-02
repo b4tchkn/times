@@ -1,4 +1,4 @@
-package com.b4tchkn.times.ui.top.component
+package com.b4tchkn.times.ui.component.top
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

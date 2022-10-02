@@ -1,4 +1,4 @@
-package com.b4tchkn.times.ui.top
+package com.b4tchkn.times.ui.screen.top
 
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.b4tchkn.times.ui.Connector
-import com.b4tchkn.times.ui.top.model.TopAction
+import com.b4tchkn.times.ui.screen.top.model.TopAction
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 

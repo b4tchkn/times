@@ -19,7 +19,7 @@ import com.b4tchkn.times.model.State
 import com.b4tchkn.times.model.StoreViewModel
 import com.b4tchkn.times.ui.component.ErrorScreen
 import com.b4tchkn.times.ui.component.LoadIndicator
-import com.b4tchkn.times.ui.top.model.TopSideEffect
+import com.b4tchkn.times.ui.screen.top.model.TopSideEffect
 
 @Composable
 fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
