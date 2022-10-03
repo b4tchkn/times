@@ -10,7 +10,7 @@ hilt = "2.44"
 
 androidxCore = "1.9.0"
 compose = "1.2.1"
-coilCompose = "2.2.1"
+coilCompose = "2.2.2"
 accompanist = "0.25.1"
 androidxLifecycle = "2.5.1"
 androidxActivity = "1.6.0"
