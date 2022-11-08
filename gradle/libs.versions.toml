@@ -16,7 +16,7 @@ androidxLifecycle = "2.5.1"
 androidxActivity = "1.6.1"
 junit = "4.13.2"
 androidxTestExt = "1.1.3"
-androidxTestEspresso = "3.4.0"
+androidxTestEspresso = "3.5.0"
 mockitoKotlin = "4.0.0"
 mockitoInline = "4.8.1"
 
