@@ -1,11 +1,11 @@
-package com.b4tchkn.times.ui.top.component.category_topic
+package com.b4tchkn.times.ui.component.top.category_topic
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.b4tchkn.times.model.GoogleNewsArticleModel
 import com.b4tchkn.times.ui.component.AppDivider
-import com.b4tchkn.times.ui.top.component.TopArticleItem
+import com.b4tchkn.times.ui.component.top.TopArticleItem
 
 @Composable
 fun TopCategoryTopicNewsList(

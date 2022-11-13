@@ -1,4 +1,4 @@
-package com.b4tchkn.times.ui.top.model
+package com.b4tchkn.times.ui.screen.top.model
 
 import com.b4tchkn.times.model.Action
 
