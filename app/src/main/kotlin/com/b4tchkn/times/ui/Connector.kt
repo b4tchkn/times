@@ -31,7 +31,7 @@ fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
     storeViewModel: StoreViewModel<ACTION, STATE, SIDE_EFFECT>,
     initAction: ACTION,
     initActionLoad: ACTION,
-    refreshLoad: ACTION,
+    refreshActionLoad: ACTION,
     screen: @Composable (state: STATE) -> Unit,
 ) {
     val context = LocalContext.current
@@ -41,7 +41,7 @@ fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
 
     LaunchedEffect(Unit) {
         lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-            storeViewModel.dispatch(if (inited) refreshLoad else initActionLoad)
+            storeViewModel.dispatch(if (inited) refreshActionLoad else initActionLoad)
             storeViewModel.dispatch(initAction)
             inited = true
 

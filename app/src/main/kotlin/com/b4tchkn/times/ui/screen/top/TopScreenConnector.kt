@@ -29,7 +29,7 @@ fun TopScreenConnector(
             storeViewModel = viewModel,
             initAction = TopAction.Init,
             initActionLoad = TopAction.InitLoad,
-            refreshLoad = TopAction.RefreshLoad,
+            refreshActionLoad = TopAction.RefreshLoad,
         ) { state ->
             TopScreen(
                 paddingValues = it,
