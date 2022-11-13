@@ -1,4 +1,4 @@
-package com.b4tchkn.times.ui.top
+package com.b4tchkn.times.ui.screen.top
 
 import com.b4tchkn.times.domain.GetCurrentWeatherUseCase
 import com.b4tchkn.times.domain.GetGoogleTopicNewsUseCase
@@ -7,8 +7,8 @@ import com.b4tchkn.times.model.GoogleNewsRssModel
 import com.b4tchkn.times.model.GoogleNewsServiceTopicTypeModel
 import com.b4tchkn.times.model.Producer
 import com.b4tchkn.times.ui.LoadingStatus
-import com.b4tchkn.times.ui.top.model.TopAction
-import com.b4tchkn.times.ui.top.model.TopSideEffect
+import com.b4tchkn.times.ui.screen.top.model.TopAction
+import com.b4tchkn.times.ui.screen.top.model.TopSideEffect
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -21,12 +21,12 @@ class TopProducer @Inject constructor(
     private val getGoogleTopicNewsUseCase: GetGoogleTopicNewsUseCase,
     private val getNewsTopHeadlinesUseCase: GetNewsTopHeadlinesUseCase,
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
-) : Producer<TopState, TopAction, TopSideEffect>() {
+) : Producer<TopUiState, TopAction, TopSideEffect>() {
     private val _sideEffect = MutableSharedFlow<TopSideEffect>()
     override val sideEffect: SharedFlow<TopSideEffect>
         get() = _sideEffect.asSharedFlow()
 
-    override suspend fun reduce(state: TopState, action: TopAction): TopState {
+    override suspend fun reduce(state: TopUiState, action: TopAction): TopUiState {
         return when (action) {
             is TopAction.Init -> fetch(state, action)
             is TopAction.Refresh -> fetch(state, action)
@@ -35,7 +35,7 @@ class TopProducer @Inject constructor(
         }
     }
 
-    private suspend fun fetch(state: TopState, action: TopAction): TopState {
+    private suspend fun fetch(state: TopUiState, action: TopAction): TopUiState {
         val googleTopicNewsUseCases = mutableListOf<Flow<Result<GoogleNewsRssModel>>>()
         GoogleNewsServiceTopicTypeModel.values().forEach {
             googleTopicNewsUseCases.add(getGoogleTopicNewsUseCase(it))
