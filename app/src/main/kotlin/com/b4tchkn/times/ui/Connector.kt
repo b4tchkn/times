@@ -7,6 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -19,7 +22,7 @@ import com.b4tchkn.times.model.State
 import com.b4tchkn.times.model.StoreViewModel
 import com.b4tchkn.times.ui.component.ErrorScreen
 import com.b4tchkn.times.ui.component.LoadIndicator
-import com.b4tchkn.times.ui.top.model.TopSideEffect
+import com.b4tchkn.times.ui.screen.top.model.TopSideEffect
 
 @Composable
 fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
@@ -27,15 +30,20 @@ fun <ACTION : Action, STATE : State, SIDE_EFFECT : SideEffect> Connector(
     snackbarHostState: SnackbarHostState?,
     storeViewModel: StoreViewModel<ACTION, STATE, SIDE_EFFECT>,
     initAction: ACTION,
+    initActionLoad: ACTION,
+    refreshActionLoad: ACTION,
     screen: @Composable (state: STATE) -> Unit,
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val state by storeViewModel.uiState.collectAsState()
+    var inited by rememberSaveable { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         lifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            storeViewModel.dispatch(if (inited) refreshActionLoad else initActionLoad)
             storeViewModel.dispatch(initAction)
+            inited = true
 
             storeViewModel.sideEffect.collect {
                 if (it is TopSideEffect.Common) {
