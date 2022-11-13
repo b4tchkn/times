@@ -17,12 +17,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.b4tchkn.times.R
+import com.b4tchkn.times.model.GoogleNewsArticleModel
+import com.b4tchkn.times.model.NewsArticleModel
 import com.b4tchkn.times.ui.component.Gap
-import com.b4tchkn.times.ui.theme.AppColor
 import com.b4tchkn.times.ui.component.top.TopArticleHeader
 import com.b4tchkn.times.ui.component.top.TopWeatherContent
 import com.b4tchkn.times.ui.component.top.category_topic.TopCategoryTopicNews
 import com.b4tchkn.times.ui.component.top.headlines_carousel.TopHeadlinesCarousel
+import com.b4tchkn.times.ui.theme.AppColor
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
@@ -31,6 +33,11 @@ fun TopScreen(
     paddingValues: PaddingValues,
     topState: TopUiState,
     onRefreshed: () -> Unit,
+    onArticleHeaderClicked: () -> Unit,
+    onSearchClicked: () -> Unit,
+    onWeatherContentClicked: () -> Unit,
+    onHeadlineArticleClicked: (article: NewsArticleModel) -> Unit,
+    onCategoryTopicArticleClicked: (article: GoogleNewsArticleModel) -> Unit,
 ) {
     val googleCategoryTopics = topState.googleTopicNews
     val topHeadlines = topState.topHeadlines?.articles
@@ -54,9 +61,10 @@ fun TopScreen(
                     Box(
                         contentAlignment = Alignment.TopEnd
                     ) {
-                        TopArticleHeader(article = article) {
-                            // TODO: handle callback
-                        }
+                        TopArticleHeader(
+                            article = article,
+                            onClicked = onArticleHeaderClicked,
+                        )
                         Box(
                             modifier = Modifier.padding(top = 16.dp, end = 16.dp)
                         ) {
@@ -64,9 +72,7 @@ fun TopScreen(
                                 modifier = Modifier
                                     .clip(RoundedCornerShape(8.dp))
                                     .background(AppColor.Grey)
-                                    .clickable {
-                                        // TODO: handle callback
-                                    }
+                                    .clickable { onSearchClicked() }
                                     .padding(12.dp),
                                 imageVector = Icons.Default.Search,
                                 contentDescription = stringResource(id = R.string.semantics_search)
@@ -84,9 +90,10 @@ fun TopScreen(
                                 Box(
                                     modifier = Modifier.padding(horizontal = 16.dp)
                                 ) {
-                                    TopWeatherContent(currentWeather = currentWeather) {
-                                        // TODO: handle callback
-                                    }
+                                    TopWeatherContent(
+                                        currentWeather = currentWeather,
+                                        onClicked = onWeatherContentClicked,
+                                    )
                                 }
                             }
                             2 -> {
@@ -97,9 +104,10 @@ fun TopScreen(
                 }
                 if (topHeadlines != null) {
                     item {
-                        TopHeadlinesCarousel(headlines = topHeadlines, onArticleCardClicked = {
-                            // TODO: handle callback
-                        })
+                        TopHeadlinesCarousel(
+                            headlines = topHeadlines,
+                            onArticleCardClicked = onHeadlineArticleClicked,
+                        )
                     }
                     item {
                         Gap(padding = 16.dp)
@@ -109,9 +117,7 @@ fun TopScreen(
                     item {
                         TopCategoryTopicNews(
                             googleCategoryTopicNews = googleCategoryTopics,
-                            onArticleClicked = {
-                                // TODO: handle callback
-                            },
+                            onArticleClicked = onCategoryTopicArticleClicked,
                         )
                     }
                     item {

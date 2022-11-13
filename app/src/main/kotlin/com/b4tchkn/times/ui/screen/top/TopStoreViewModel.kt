@@ -29,6 +29,11 @@ class TopStoreViewModel @Inject constructor(
     override val sideEffect: SharedFlow<TopSideEffect>
         get() = producer.sideEffect
 
+    init {
+        dispatch(TopAction.InitLoad)
+        dispatch(TopAction.Init)
+    }
+
     override fun dispatch(action: TopAction) {
         viewModelScope.launch {
             _uiState.value = producer.reduce(_uiState.value, action)

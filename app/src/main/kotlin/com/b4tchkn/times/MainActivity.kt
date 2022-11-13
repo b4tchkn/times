@@ -7,9 +7,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.b4tchkn.times.ui.screen.top.NavGraphs
+import com.b4tchkn.times.ui.screen.NavGraphs
+import com.b4tchkn.times.ui.screen.destinations.SearchScreenConnectorDestination
+import com.b4tchkn.times.ui.screen.destinations.TopScreenConnectorDestination
+import com.b4tchkn.times.ui.screen.search.SearchScreenConnector
+import com.b4tchkn.times.ui.screen.top.TopScreenConnector
 import com.b4tchkn.times.ui.theme.TimesTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
+import com.ramcosta.composedestinations.manualcomposablecalls.composable
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +30,16 @@ class MainActivity : ComponentActivity() {
                     DestinationsNavHost(
                         navGraph = NavGraphs.root,
                         startRoute = NavGraphs.root.startRoute,
-                    )
+                    ) {
+                        composable(TopScreenConnectorDestination) {
+                            TopScreenConnector(
+                                navigator = destinationsNavigator,
+                            )
+                        }
+                        composable(SearchScreenConnectorDestination) {
+                            SearchScreenConnector()
+                        }
+                    }
                 }
             }
         }

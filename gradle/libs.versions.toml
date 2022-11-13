@@ -13,7 +13,7 @@ androidxCore = "1.9.0"
 compose = "1.2.1"
 coilCompose = "2.2.1"
 accompanist = "0.25.1"
-androidxLifecycle = "2.5.1"
+androidxLifecycle = "2.6.0-alpha03"
 androidxActivity = "1.6.0"
 composeDestinations = "1.7.21-beta"
 junit = "4.13.2"
@@ -42,6 +42,7 @@ accompanistSwiperefresh = { group = "com.google.accompanist", name = "accompanis
 composeMaterial = { group = "androidx.compose.material", name = "material", version.ref = "compose" }
 composeUiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
 androidxLifecycleRuntimeKtx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
+androidxLifecycleRuntimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
 androidxLifecycleViewmodelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidxActivity = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 composeDestinationsCore = { group = "io.github.raamcosta.compose-destinations", name = "core", version.ref = "composeDestinations" }
