@@ -7,9 +7,9 @@ import com.b4tchkn.times.domain.GetNewsTopHeadlinesUseCase
 import com.b4tchkn.times.model.CurrentWeatherModel
 import com.b4tchkn.times.model.GoogleNewsRssModel
 import com.b4tchkn.times.model.NewsModel
-import com.b4tchkn.times.ui.top.TopProducer
-import com.b4tchkn.times.ui.top.TopState
-import com.b4tchkn.times.ui.top.model.TopAction
+import com.b4tchkn.times.ui.screen.top.TopProducer
+import com.b4tchkn.times.ui.screen.top.TopUiState
+import com.b4tchkn.times.ui.screen.top.model.TopAction
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -54,7 +54,7 @@ class TopProducerTest : UseCaseTest() {
         whenever(
             getCurrentWeatherUseCase(any(), any())
         ).thenReturn(flowOf(Result.success(currentWeatherModel)))
-        val currentState = TopState(
+        val currentState = TopUiState(
             googleTopicNews = listOf(),
             topHeadlines = topHeadlinesModel,
             currentWeather = currentWeatherModel,
@@ -64,7 +64,7 @@ class TopProducerTest : UseCaseTest() {
         val newState = topProducer.reduce(currentState, action)
 
         Assert.assertEquals(
-            TopState(
+            TopUiState(
                 googleTopicNews = List(8) { googleNewsModel },
                 topHeadlines = topHeadlinesModel,
                 currentWeather = currentWeatherModel,

@@ -1,4 +1,4 @@
-package com.b4tchkn.times.ui.top.component.headlines_carousel
+package com.b4tchkn.times.ui.component.top.headlines_carousel
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
