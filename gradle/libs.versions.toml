@@ -6,7 +6,7 @@ secretsGradlePlugin = "2.0.1"
 spotless = "6.11.0"
 ktlint = "0.43.0"
 androidDesugarJdkLibs = "1.2.2"
-hilt = "2.44.1"
+hilt = "2.44.2"
 hiltNavigationCompose = "1.0.0"
 
 androidxCore = "1.9.0"
