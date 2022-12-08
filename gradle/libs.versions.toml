@@ -19,7 +19,7 @@ composeDestinations = "1.7.21-beta"
 junit = "4.13.2"
 androidxTestExt = "1.1.4"
 androidxTestEspresso = "3.5.0"
-mockitoKotlin = "4.0.0"
+mockitoKotlin = "4.1.0"
 mockitoInline = "4.9.0"
 
 retrofit = "2.9.0"
