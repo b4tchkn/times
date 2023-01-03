@@ -10,8 +10,7 @@ enum class GoogleNewsServiceTopicTypeModel {
     TECHNOLOGY,
     ENTERTAINMENT,
     SPORTS,
-    SCIENCE,
-    HEALTH;
+    SCIENCE;
 
     companion object {
         fun label(type: GoogleNewsServiceTopicTypeModel, context: Context) = when (type) {
@@ -22,7 +21,6 @@ enum class GoogleNewsServiceTopicTypeModel {
             ENTERTAINMENT -> context.getString(R.string.category_topic_entertainment)
             SPORTS -> context.getString(R.string.category_topic_sport)
             SCIENCE -> context.getString(R.string.category_topic_science)
-            HEALTH -> context.getString(R.string.category_topic_health)
         }
     }
 }
