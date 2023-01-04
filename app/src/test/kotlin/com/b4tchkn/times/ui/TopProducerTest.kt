@@ -6,6 +6,7 @@ import com.b4tchkn.times.domain.GetGoogleTopicNewsUseCase
 import com.b4tchkn.times.domain.GetNewsTopHeadlinesUseCase
 import com.b4tchkn.times.model.CurrentWeatherModel
 import com.b4tchkn.times.model.GoogleNewsRssModel
+import com.b4tchkn.times.model.GoogleNewsServiceTopicTypeModel
 import com.b4tchkn.times.model.NewsModel
 import com.b4tchkn.times.ui.screen.top.TopProducer
 import com.b4tchkn.times.ui.screen.top.TopUiState
@@ -65,7 +66,8 @@ class TopProducerTest : UseCaseTest() {
 
         Assert.assertEquals(
             TopUiState(
-                googleTopicNews = List(8) { googleNewsModel },
+                googleTopicNews =
+                List(GoogleNewsServiceTopicTypeModel.values().size) { googleNewsModel },
                 topHeadlines = topHeadlinesModel,
                 currentWeather = currentWeatherModel,
                 error = false,
