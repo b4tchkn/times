@@ -18,7 +18,7 @@ androidxActivity = "1.6.1"
 composeDestinations = "1.7.21-beta"
 junit = "4.13.2"
 androidxTestExt = "1.1.4"
-androidxTestEspresso = "3.5.0"
+androidxTestEspresso = "3.5.1"
 mockitoKotlin = "4.1.0"
 mockitoInline = "4.11.0"
 
