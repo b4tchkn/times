@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.b4tchkn.times.ui.Connector
 import com.b4tchkn.times.ui.screen.destinations.SearchScreenConnectorDestination
+import com.b4tchkn.times.ui.screen.destinations.WeatherScreenConnectorDestination
 import com.b4tchkn.times.ui.screen.top.model.TopAction
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
@@ -42,7 +43,9 @@ fun TopScreenConnector(
                 onSearchClicked = {
                     navigator.navigate(SearchScreenConnectorDestination)
                 },
-                onWeatherContentClicked = {},
+                onWeatherContentClicked = {
+                    navigator.navigate(WeatherScreenConnectorDestination)
+                },
                 onHeadlineArticleClicked = {},
                 onCategoryTopicArticleClicked = {},
             )

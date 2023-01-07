@@ -10,10 +10,13 @@ import androidx.compose.ui.Modifier
 import com.b4tchkn.times.ui.screen.NavGraphs
 import com.b4tchkn.times.ui.screen.destinations.SearchScreenConnectorDestination
 import com.b4tchkn.times.ui.screen.destinations.TopScreenConnectorDestination
+import com.b4tchkn.times.ui.screen.destinations.WeatherScreenConnectorDestination
 import com.b4tchkn.times.ui.screen.search.SearchScreenConnector
 import com.b4tchkn.times.ui.screen.top.TopScreenConnector
+import com.b4tchkn.times.ui.screen.weather.WeatherScreenConnector
 import com.b4tchkn.times.ui.theme.TimesTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
+import com.ramcosta.composedestinations.manualcomposablecalls.ManualComposableCallsBuilder
 import com.ramcosta.composedestinations.manualcomposablecalls.composable
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,17 +34,24 @@ class MainActivity : ComponentActivity() {
                         navGraph = NavGraphs.root,
                         startRoute = NavGraphs.root.startRoute,
                     ) {
-                        composable(TopScreenConnectorDestination) {
-                            TopScreenConnector(
-                                navigator = destinationsNavigator,
-                            )
-                        }
-                        composable(SearchScreenConnectorDestination) {
-                            SearchScreenConnector()
-                        }
+                        composableGroup()
                     }
                 }
             }
         }
+    }
+}
+
+private fun ManualComposableCallsBuilder.composableGroup() {
+    composable(TopScreenConnectorDestination) {
+        TopScreenConnector(
+            navigator = destinationsNavigator,
+        )
+    }
+    composable(SearchScreenConnectorDestination) {
+        SearchScreenConnector()
+    }
+    composable(WeatherScreenConnectorDestination) {
+        WeatherScreenConnector()
     }
 }
