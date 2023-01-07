@@ -1,7 +1,7 @@
 plugins {
     id("com.b4tchkn.primitive.androidapplication")
     id("com.b4tchkn.primitive.spotless")
-    id("com.google.devtools.ksp") version "1.7.10-1.0.6"
+    id("com.google.devtools.ksp") version "1.7.22-1.0.8"
 }
 
 android {
@@ -9,7 +9,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.1"
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
     applicationVariants.all {
         kotlin.sourceSets {
