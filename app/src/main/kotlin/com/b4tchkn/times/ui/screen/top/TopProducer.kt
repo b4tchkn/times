@@ -9,13 +9,13 @@ import com.b4tchkn.times.model.Producer
 import com.b4tchkn.times.ui.LoadingStatus
 import com.b4tchkn.times.ui.screen.top.model.TopAction
 import com.b4tchkn.times.ui.screen.top.model.TopSideEffect
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
-import javax.inject.Inject
 
 class TopProducer @Inject constructor(
     private val getGoogleTopicNewsUseCase: GetGoogleTopicNewsUseCase,
