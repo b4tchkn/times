@@ -38,7 +38,7 @@ import com.b4tchkn.times.util.formatBeforeDateTimeFromNowString
 @Composable
 fun TopArticleHeader(
     article: NewsArticleModel,
-    onClicked: () -> Unit
+    onClicked: (article: NewsArticleModel) -> Unit
 ) {
     val context = LocalContext.current
     val gradientBlackWhite = Brush.verticalGradient(
@@ -49,7 +49,7 @@ fun TopArticleHeader(
         modifier = Modifier
             .height(320.dp)
             .clip(RoundedCornerShape(bottomEnd = 24.dp, bottomStart = 24.dp))
-            .clickable { onClicked() }
+            .clickable { onClicked(article) }
     ) {
         AsyncImage(
             modifier = Modifier
