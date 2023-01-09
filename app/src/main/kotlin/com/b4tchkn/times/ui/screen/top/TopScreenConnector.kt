@@ -9,6 +9,7 @@ import com.b4tchkn.times.ui.screen.destinations.SearchScreenConnectorDestination
 import com.b4tchkn.times.ui.screen.destinations.WeatherScreenConnectorDestination
 import com.b4tchkn.times.ui.screen.destinations.WebViewScreenDestination
 import com.b4tchkn.times.ui.screen.top.model.TopAction
+import com.b4tchkn.times.util.urlFromHtmlTag
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -66,7 +67,7 @@ fun TopScreenConnector(
                     navigator.navigate(
                         WebViewScreenDestination(
                             title = it.title,
-                            url = it.link,
+                            url = urlFromHtmlTag(it.description),
                         ),
                     )
                 },
