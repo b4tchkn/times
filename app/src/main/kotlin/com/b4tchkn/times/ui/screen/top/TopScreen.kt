@@ -33,7 +33,7 @@ fun TopScreen(
     paddingValues: PaddingValues,
     topState: TopUiState,
     onRefreshed: () -> Unit,
-    onArticleHeaderClicked: () -> Unit,
+    onArticleHeaderClicked: (article: NewsArticleModel) -> Unit,
     onSearchClicked: () -> Unit,
     onWeatherContentClicked: () -> Unit,
     onHeadlineArticleClicked: (article: NewsArticleModel) -> Unit,
