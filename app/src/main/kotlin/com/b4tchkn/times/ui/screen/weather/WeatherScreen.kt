@@ -9,12 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun WeatherScreen(paddingValues: PaddingValues) {
+fun WeatherScreen(
+    paddingValues: PaddingValues,
+    state: WeatherUiState,
+) {
     Box(
         modifier = Modifier
             .padding(top = paddingValues.calculateTopPadding())
             .fillMaxSize(),
     ) {
-        Text(text = "Weather")
+        Text(text = "${state.currentWeather}")
     }
 }
