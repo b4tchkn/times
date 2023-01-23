@@ -1,6 +1,6 @@
 package com.b4tchkn.times.ui
 
-import com.b4tchkn.times.UseCaseTest
+import com.b4tchkn.times.MockitoTestBase
 import com.b4tchkn.times.domain.GetCurrentWeatherUseCase
 import com.b4tchkn.times.domain.GetGoogleTopicNewsUseCase
 import com.b4tchkn.times.domain.GetNewsTopHeadlinesUseCase
@@ -22,7 +22,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class TopProducerTest : UseCaseTest() {
+class TopProducerTestBase : MockitoTestBase() {
     @Mock
     lateinit var getGoogleTopicNewsUseCase: GetGoogleTopicNewsUseCase
 
