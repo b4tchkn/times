@@ -1,6 +1,6 @@
 package com.b4tchkn.times.domain
 
-import com.b4tchkn.times.UseCaseTest
+import com.b4tchkn.times.MockitoTestBase
 import com.b4tchkn.times.data.NewsApiService
 import com.b4tchkn.times.model.NewsModel
 import com.b4tchkn.times.model.response.NewsResponse
@@ -17,14 +17,14 @@ import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class GetNewsTopHeadlinesUseCaseTest : UseCaseTest() {
+class GetNewsEverythingMockitoTestBase : MockitoTestBase() {
     @Mock
     lateinit var newsApiService: NewsApiService
-    lateinit var getNewsTopHeadlinesUseCase: GetNewsTopHeadlinesUseCase
+    lateinit var getNewsEverythingUseCase: GetNewsEverythingUseCase
 
     @Before
     fun setup() {
-        getNewsTopHeadlinesUseCase = GetNewsTopHeadlinesUseCase(
+        getNewsEverythingUseCase = GetNewsEverythingUseCase(
             newsApiService,
             Dispatchers.IO,
         )
@@ -32,10 +32,10 @@ class GetNewsTopHeadlinesUseCaseTest : UseCaseTest() {
 
     @Test
     fun useCase_Success() = runTest {
-        whenever(newsApiService.getTopHeadlines())
+        whenever(newsApiService.getEverything())
             .thenReturn(NewsResponse.defaultInstance)
 
-        val response = getNewsTopHeadlinesUseCase()
+        val response = getNewsEverythingUseCase()
 
         val model = NewsModel.defaultInstance
         Assert.assertEquals(
@@ -47,9 +47,9 @@ class GetNewsTopHeadlinesUseCaseTest : UseCaseTest() {
     @Test
     fun useCase_Failure() = runTest {
         val exception = RuntimeException()
-        doThrow(exception).whenever(newsApiService).getTopHeadlines()
+        doThrow(exception).whenever(newsApiService).getEverything()
 
-        val response = getNewsTopHeadlinesUseCase()
+        val response = getNewsEverythingUseCase()
 
         Assert.assertEquals(
             flowOf(Result.failure<Exception>(exception)).first(),
