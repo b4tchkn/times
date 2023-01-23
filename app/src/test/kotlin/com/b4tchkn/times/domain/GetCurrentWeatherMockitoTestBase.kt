@@ -1,6 +1,6 @@
 package com.b4tchkn.times.domain
 
-import com.b4tchkn.times.UseCaseTest
+import com.b4tchkn.times.MockitoTestBase
 import com.b4tchkn.times.data.OpenWeatherService
 import com.b4tchkn.times.model.CurrentWeatherModel
 import com.b4tchkn.times.model.response.CurrentWeatherResponse
@@ -18,7 +18,7 @@ import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class GetCurrentWeatherUseCaseTest : UseCaseTest() {
+class GetCurrentWeatherMockitoTestBase : MockitoTestBase() {
     @Mock
     lateinit var openWeatherService: OpenWeatherService
     lateinit var getCurrentWeatherUseCase: GetCurrentWeatherUseCase

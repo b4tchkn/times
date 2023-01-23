@@ -4,7 +4,7 @@ import org.junit.After
 import org.junit.Before
 import org.mockito.MockitoAnnotations
 
-open class UseCaseTest {
+open class MockitoTestBase {
     private lateinit var closeable: AutoCloseable
 
     @Before
