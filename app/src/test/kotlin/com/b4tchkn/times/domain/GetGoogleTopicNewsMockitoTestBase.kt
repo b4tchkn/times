@@ -1,6 +1,6 @@
 package com.b4tchkn.times.domain
 
-import com.b4tchkn.times.UseCaseTest
+import com.b4tchkn.times.MockitoTestBase
 import com.b4tchkn.times.data.GoogleNewsService
 import com.b4tchkn.times.model.GoogleNewsRssModel
 import com.b4tchkn.times.model.GoogleNewsServiceTopicTypeModel
@@ -19,7 +19,7 @@ import org.mockito.kotlin.doThrow
 import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class GetGoogleTopicNewsUseCaseTest : UseCaseTest() {
+class GetGoogleTopicNewsMockitoTestBase : MockitoTestBase() {
     @Mock
     lateinit var googleNewsService: GoogleNewsService
     lateinit var getGoogleTopicNewsUseCase: GetGoogleTopicNewsUseCase
