@@ -1,7 +1,7 @@
 plugins {
     id("com.b4tchkn.primitive.androidapplication")
     id("com.b4tchkn.primitive.spotless")
-    id("com.google.devtools.ksp") version "1.7.22-1.0.8"
+    id("com.google.devtools.ksp") version "1.8.10-1.0.9"
 }
 
 android {
