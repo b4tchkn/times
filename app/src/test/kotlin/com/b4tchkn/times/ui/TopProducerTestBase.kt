@@ -59,6 +59,7 @@ class TopProducerTestBase : MockitoTestBase() {
             googleTopicNews = listOf(),
             topHeadlines = topHeadlinesModel,
             currentWeather = currentWeatherModel,
+            location = null,
             error = false,
             loadingStatus = LoadingStatus.Init(loading = false)
         )
@@ -70,6 +71,7 @@ class TopProducerTestBase : MockitoTestBase() {
                 List(GoogleNewsServiceTopicTypeModel.values().size) { googleNewsModel },
                 topHeadlines = topHeadlinesModel,
                 currentWeather = currentWeatherModel,
+                location = null,
                 error = false,
                 loadingStatus = LoadingStatus.Init(loading = false)
             ),

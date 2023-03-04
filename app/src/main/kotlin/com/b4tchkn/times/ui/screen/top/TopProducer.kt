@@ -3,11 +3,13 @@ package com.b4tchkn.times.ui.screen.top
 import com.b4tchkn.times.domain.GetCurrentWeatherUseCase
 import com.b4tchkn.times.domain.GetGoogleTopicNewsUseCase
 import com.b4tchkn.times.domain.GetNewsTopHeadlinesUseCase
+import com.b4tchkn.times.model.CurrentWeatherModel
 import com.b4tchkn.times.model.GoogleNewsRssModel
 import com.b4tchkn.times.model.GoogleNewsServiceTopicTypeModel
 import com.b4tchkn.times.model.Producer
 import com.b4tchkn.times.ui.LoadingStatus
 import com.b4tchkn.times.ui.screen.top.model.TopAction
+import com.b4tchkn.times.ui.screen.top.model.TopAction.UpdateLocation
 import com.b4tchkn.times.ui.screen.top.model.TopSideEffect
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -32,6 +34,7 @@ class TopProducer @Inject constructor(
             is TopAction.Refresh -> fetch(state, action)
             is TopAction.InitLoad -> state.copy(loadingStatus = LoadingStatus.Init(true))
             is TopAction.RefreshLoad -> state.copy(loadingStatus = LoadingStatus.Refresh(true))
+            is UpdateLocation -> fetch(state, action)
         }
     }
 
@@ -40,23 +43,40 @@ class TopProducer @Inject constructor(
         GoogleNewsServiceTopicTypeModel.values().forEach {
             googleTopicNewsUseCases.add(getGoogleTopicNewsUseCase(it))
         }
+
+        if (action is UpdateLocation) {
+            val latitude = action.location.first
+            val longitude = action.location.second
+
+            val currentWeather: Flow<Result<CurrentWeatherModel?>> =
+                getCurrentWeatherUseCase(
+                    latitude = latitude,
+                    longitude = longitude,
+                )
+            return try {
+                state.copy(
+                    currentWeather = currentWeather.first().getOrThrow(),
+                    loadingStatus = loadedStatusFromAction(action),
+                )
+            } catch (e: Exception) {
+                state.copy(
+                    error = true,
+                    loadingStatus = loadedStatusFromAction(action),
+                )
+            }
+        }
+
         val topHeadlines = getNewsTopHeadlinesUseCase()
-        val currentWeather = getCurrentWeatherUseCase(
-            latitude = 35.658034,
-            longitude = 139.701636,
-        )
         val googleTopicNewsFlows = combine(flows = googleTopicNewsUseCases) { it }
 
         return combine(
             googleTopicNewsFlows,
             topHeadlines,
-            currentWeather
-        ) { googleTopicNewsResults, topHeadlinesResult, currentWeatherResult ->
+        ) { googleTopicNewsResults, topHeadlinesResult ->
             val newState = try {
                 state.copy(
                     googleTopicNews = googleTopicNewsResults.map { it.getOrThrow() },
                     topHeadlines = topHeadlinesResult.getOrThrow(),
-                    currentWeather = currentWeatherResult.getOrThrow(),
                     loadingStatus = loadedStatusFromAction(action),
                 )
             } catch (e: Exception) {
@@ -74,5 +94,6 @@ class TopProducer @Inject constructor(
         TopAction.InitLoad -> LoadingStatus.Init(loading = false)
         TopAction.Refresh -> LoadingStatus.Refresh(loading = false)
         TopAction.RefreshLoad -> LoadingStatus.Refresh(false)
+        is UpdateLocation -> LoadingStatus.Refresh(loading = false)
     }
 }

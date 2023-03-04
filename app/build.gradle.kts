@@ -30,6 +30,7 @@ dependencies {
     implementation(libs.coilCompose)
     implementation(libs.accompanistPager)
     implementation(libs.accompanistSwiperefresh)
+    implementation(libs.accompanistPermissions)
     implementation(libs.composeMaterial)
     implementation(libs.composeUiToolingPreview)
     implementation(libs.androidxLifecycleRuntimeKtx)
@@ -38,6 +39,8 @@ dependencies {
     implementation(libs.composeDestinationsCore)
     ksp(libs.composeDestinationsKsp)
     implementation(libs.hiltNavigationComopse)
+
+    implementation(libs.gmsPlayServicesLocation)
 
     implementation(libs.retrofit)
     implementation(libs.retrofitConverterSimplexml)
