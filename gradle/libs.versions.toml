@@ -8,6 +8,7 @@ ktlint = "0.43.0"
 androidDesugarJdkLibs = "1.2.2"
 hilt = "2.45"
 hiltNavigationCompose = "1.0.0"
+gmsPlayServicesLocation = "21.0.1"
 
 androidxCore = "1.9.0"
 compose = "1.3.3"
@@ -40,6 +41,7 @@ composeUi = { group = "androidx.compose.ui", name = "ui", version.ref = "compose
 coilCompose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
 accompanistPager = { group = "com.google.accompanist", name = "accompanist-pager", version.ref = "accompanist" }
 accompanistSwiperefresh = { group = "com.google.accompanist", name = "accompanist-swiperefresh", version.ref = "accompanist" }
+accompanistPermissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
 composeMaterial = { group = "androidx.compose.material", name = "material", version.ref = "composeMaterial" }
 composeUiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
 androidxLifecycleRuntimeKtx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
@@ -48,7 +50,8 @@ androidxLifecycleViewmodelCompose = { group = "androidx.lifecycle", name = "life
 androidxActivity = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
 composeDestinationsCore = { group = "io.github.raamcosta.compose-destinations", name = "core", version.ref = "composeDestinations" }
 composeDestinationsKsp = { group = "io.github.raamcosta.compose-destinations", name = "ksp", version.ref = "composeDestinations" }
-hiltNavigationComopse = {group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose"}
+hiltNavigationComopse = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+gmsPlayServicesLocation = { group = "com.google.android.gms", name = "play-services-location", version.ref = "gmsPlayServicesLocation" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidxTestExtJunit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExt" }
 androidxTestEspressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxTestEspresso" }

@@ -30,20 +30,21 @@ fun TopHeadlinesCarousel(
             fontWeight = FontWeight.Bold,
         )
         Gap(height = 8.dp)
-        LazyRow(
-            contentPadding = PaddingValues(horizontal = 16.dp)
-        ) {
-            items(maxHeadlinesCount) {
-                if (it != 0) {
-                    TopHeadlinesCarouselArticleCard(
-                        modifier = Modifier.padding(
-                            end = if (it != maxHeadlinesCount - 1) 16.dp else 0.dp
-                        ),
-                        article = headlines[it],
-                        onCardClicked = { onArticleCardClicked(headlines[it]) },
-                    )
+        if (headlines.isNotEmpty())
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 16.dp)
+            ) {
+                items(maxHeadlinesCount) {
+                    if (it != 0) {
+                        TopHeadlinesCarouselArticleCard(
+                            modifier = Modifier.padding(
+                                end = if (it != maxHeadlinesCount - 1) 16.dp else 0.dp
+                            ),
+                            article = headlines[it],
+                            onCardClicked = { onArticleCardClicked(headlines[it]) },
+                        )
+                    }
                 }
             }
-        }
     }
 }

@@ -45,6 +45,7 @@ data class TopUiState(
     val googleTopicNews: List<GoogleNewsRssModel>,
     val topHeadlines: NewsModel?,
     val currentWeather: CurrentWeatherModel?,
+    val location: Pair<Double, Double>?,
     override val error: Boolean,
     override val loadingStatus: LoadingStatus,
 ) : State() {
@@ -53,6 +54,7 @@ data class TopUiState(
             googleTopicNews = listOf(),
             topHeadlines = null,
             currentWeather = null,
+            location = null,
             error = false,
             loadingStatus = LoadingStatus.Init(loading = false)
         )

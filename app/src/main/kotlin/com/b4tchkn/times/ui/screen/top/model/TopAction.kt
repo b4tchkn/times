@@ -7,4 +7,6 @@ sealed interface TopAction : Action {
     object Refresh : TopAction
     object InitLoad : TopAction
     object RefreshLoad : TopAction
+
+    data class UpdateLocation(val location: Pair<Double, Double>) : TopAction
 }

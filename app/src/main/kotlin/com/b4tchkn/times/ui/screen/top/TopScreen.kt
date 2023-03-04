@@ -25,9 +25,11 @@ import com.b4tchkn.times.ui.component.top.TopWeatherContent
 import com.b4tchkn.times.ui.component.top.category_topic.TopCategoryTopicNews
 import com.b4tchkn.times.ui.component.top.headlines_carousel.TopHeadlinesCarousel
 import com.b4tchkn.times.ui.theme.AppColor
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun TopScreen(
     paddingValues: PaddingValues,
