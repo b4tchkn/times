@@ -26,7 +26,7 @@ mockitoInline = "5.1.1"
 retrofit = "2.9.0"
 okhttp = "4.10.0"
 
-kotlinSerialization = "1.4.1"
+kotlinSerialization = "1.5.1"
 retrofitKotlinSerializationConverter = "0.8.0"
 
 [libraries]
