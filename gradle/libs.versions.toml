@@ -21,7 +21,7 @@ junit = "4.13.2"
 androidxTestExt = "1.1.5"
 androidxTestEspresso = "3.5.1"
 mockitoKotlin = "4.1.0"
-mockitoInline = "5.1.1"
+mockitoInline = "5.2.0"
 
 retrofit = "2.9.0"
 okhttp = "4.10.0"
